@@ -25,7 +25,7 @@ public class Serie extends Midia implements Exibivel {
 
     @Override
     public int getDuracaoTotalMinutos() {
-        return temporadas * episodiosPorTemporada + duracaoMediaEpisodio;
+        return temporadas * episodiosPorTemporada * duracaoMediaEpisodio;
     }
 
     @Override

@@ -1,0 +1,13 @@
+# Bytecode e saída de compilação
+*.class
+out/
+bin/
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
+# Sistema
+.DS_Store
+Thumbs.db

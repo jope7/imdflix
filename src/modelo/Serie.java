@@ -23,6 +23,14 @@ public class Serie extends Midia implements Exibivel {
         return "Serie";
     }
 
+    public int getEpisodiosPorTemporada() {
+        return episodiosPorTemporada;
+    }
+
+    public int getDuracaoMediaEpisodio() {
+        return duracaoMediaEpisodio;
+    }
+
     @Override
     public int getDuracaoTotalMinutos() {
         return temporadas * episodiosPorTemporada * duracaoMediaEpisodio;

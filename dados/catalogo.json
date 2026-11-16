@@ -1,0 +1,44 @@
+[
+  {
+    "tipo": "Filme",
+    "titulo": "Matrix",
+    "genero": "Ficcao",
+    "ano": 1999,
+    "duracaoMinutos": 136,
+    "diretor": "Wachowski"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Interestelar",
+    "genero": "Ficcao",
+    "ano": 2014,
+    "duracaoMinutos": 169,
+    "diretor": "Christopher Nolan"
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Dark",
+    "genero": "Suspense",
+    "ano": 2017,
+    "temporadas": 3,
+    "episodiosPorTemporada": 8,
+    "duracaoMediaEpisodio": 50
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "Free Solo",
+    "genero": "Aventura",
+    "ano": 2018,
+    "duracaoMinutos": 100,
+    "tema": "Escalada"
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Cosmos",
+    "genero": "Ciencia",
+    "ano": 2014,
+    "temporadas": 1,
+    "episodiosPorTemporada": 13,
+    "duracaoMediaEpisodio": 45
+  }
+]

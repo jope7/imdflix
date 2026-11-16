@@ -24,9 +24,10 @@ public class Usuario {
     private final List<String> minhaLista = new ArrayList<>();
     private final Map<String, Double> avaliacoes = new LinkedHashMap<>();
 
-    // public Usuario(String username, String nome) {
-        
-    // }
+    public Usuario(String username, String nome) {
+        this.username = normalizarUsername(username);
+        setNome(nome);
+    }
 
     public static String normalizarUsername(String username) {
         if (username == null) {

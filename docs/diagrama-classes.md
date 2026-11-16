@@ -11,6 +11,8 @@ classDiagram
     class Avaliavel {
         <<interface>>
         +avaliar(double nota) void
+        +removerAvaliacao(double nota) void
+        +substituirAvaliacao(double antiga, double nova) void
         +getNotaMedia() double
         +getQuantidadeAvaliacoes() int
     }
@@ -29,8 +31,6 @@ classDiagram
         -double somaNotas
         -int quantidadeNotas
         +getTipo()* String
-        +avaliar(double nota) void
-        +getNotaMedia() double
         +getTitulo() String
         +getGenero() String
         +getAnoLancamento() int
@@ -39,26 +39,54 @@ classDiagram
     class Filme {
         -int duracaoMinutos
         -String diretor
-        +getTipo() String
-        +getDuracaoTotalMinutos() int
     }
 
     class Serie {
         -int temporadas
         -int episodiosPorTemporada
         -int duracaoMediaEpisodio
-        +getTipo() String
-        +getDuracaoTotalMinutos() int
     }
 
     class Documentario {
         -int duracaoMinutos
         -String tema
-        +getTipo() String
-        +getDuracaoTotalMinutos() int
+    }
+
+    class Usuario {
+        -String username
+        -String nome
+        -List~String~ minhaLista
+        -Map~String, Double~ avaliacoes
+        +normalizarUsername(String username)$ String
+        +adicionarNaLista(Midia midia) void
+        +removerDaLista(Midia midia) void
+        +avaliar(Midia midia, double nota) void
+        +getUsername() String
+        +getNome() String
+    }
+
+    class Catalogo {
+        -Map~String, Midia~ midias
+        +cadastrar(Midia midia) void
+        +buscarPorTitulo(String titulo) Optional~Midia~
+        +filtrarPorGenero(String genero) List~Midia~
+        +listarTodos() List~Midia~
+    }
+
+    class GerenciadorUsuarios {
+        -Map~String, Usuario~ usuarios
+        +cadastrar(String username, String nome) Usuario
+        +entrar(String username) Optional~Usuario~
+        +listarTodos() List~Usuario~
     }
 
     class NotaInvalidaException {
+        <<exception>>
+    }
+    class TituloDuplicadoException {
+        <<exception>>
+    }
+    class UsernameJaExisteException {
         <<exception>>
     }
 
@@ -69,6 +97,13 @@ classDiagram
         +buscarPorTitulo(String titulo) Optional~Midia~
     }
 
+    class UsuarioRepositorio {
+        <<interface>>
+        +salvar(Usuario usuario) void
+        +listarTodos() List~Usuario~
+        +buscarPorUsername(String username) Optional~Usuario~
+    }
+
     Avaliavel <|.. Midia
     Midia <|-- Filme
     Midia <|-- Serie
@@ -76,13 +111,25 @@ classDiagram
     Exibivel <|.. Filme
     Exibivel <|.. Serie
     Exibivel <|.. Documentario
+
+    Usuario ..> Midia : avalia
+    Catalogo o-- Midia : contém
+    GerenciadorUsuarios o-- Usuario : contém
+
     Midia ..> NotaInvalidaException : lança
+    Catalogo ..> TituloDuplicadoException : lança
+    GerenciadorUsuarios ..> UsernameJaExisteException : lança
+
     CatalogoRepositorio ..> Midia : usa
+    UsuarioRepositorio ..> Usuario : usa
 ```
 
-## 2. Versão alvo
+## 2. Versão alvo (oque ainda falta)
 
-Classes a serem adicionadas `Usuario`, `Catalogo`, `CatalogoJsonRepositorio`, `MidiaFactory`, `RecomendacaoStrategy` e a camada de interface em JavaFX. Para simplificar, `Filme`, `Serie` e `Documentario` aparecem sem atributos.
+Persistência em JSON (com Singleton e Factory) (JOACKYM), 
+recomendação (Strategy) (TREMBO)
+e as telas em JavaFX (VITINHO). 
+`Filme`, `Serie` e `Documentario` aparecem sem atributos para simplificar.
 
 ```mermaid
 classDiagram
@@ -90,42 +137,26 @@ classDiagram
 
     class Midia {
         <<abstract>>
-        -String titulo
-        -String genero
-        +getTipo()* String
-        +avaliar(double nota) void
     }
-    class Filme
-    class Serie
-    class Documentario
-
-    class Usuario {
-        -String nome
-        -List~Midia~ minhaLista
-        +adicionarNaLista(Midia midia) void
-        +removerDaLista(Midia midia) void
-        +getMinhaLista() List~Midia~
-    }
-
-    class Catalogo {
-        -List~Midia~ midias
-        +cadastrar(Midia midia) void
-        +buscarPorTitulo(String titulo) Midia
-        +filtrarPorGenero(String genero) List~Midia~
-        +recomendar(RecomendacaoStrategy estrategia) List~Midia~
-    }
+    class Usuario
+    class Catalogo
+    class GerenciadorUsuarios
 
     class CatalogoRepositorio {
         <<interface>>
-        +salvar(Midia midia) void
-        +listarTodos() List~Midia~
-        +buscarPorTitulo(String titulo) Optional~Midia~
+    }
+    class UsuarioRepositorio {
+        <<interface>>
     }
 
     class CatalogoJsonRepositorio {
         -static CatalogoJsonRepositorio instancia
         -String caminhoArquivo
         +getInstancia() CatalogoJsonRepositorio
+    }
+
+    class UsuarioJsonRepositorio {
+        -String caminhoArquivo
     }
 
     class MidiaFactory {
@@ -143,20 +174,17 @@ classDiagram
         <<JavaFX>>
     }
 
-    Midia <|-- Filme
-    Midia <|-- Serie
-    Midia <|-- Documentario
-
-    Catalogo o-- Midia : contém
-    Usuario o-- Midia : minhaLista
-    Catalogo --> CatalogoRepositorio : persiste via
     CatalogoRepositorio <|.. CatalogoJsonRepositorio
-    MidiaFactory ..> Midia : cria
+    UsuarioRepositorio <|.. UsuarioJsonRepositorio
     CatalogoJsonRepositorio ..> MidiaFactory : usa
+    MidiaFactory ..> Midia : cria
+    Catalogo ..> CatalogoRepositorio : persiste via
+    GerenciadorUsuarios ..> UsuarioRepositorio : persiste via
     Catalogo ..> RecomendacaoStrategy : usa
     RecomendacaoStrategy <|.. RecomendacaoPorGenero
     RecomendacaoStrategy <|.. RecomendacaoPorNota
     TelaPrincipal --> Catalogo : usa
+    TelaPrincipal --> GerenciadorUsuarios : usa
     TelaPrincipal --> Usuario : usa
 ```
 

@@ -8,20 +8,24 @@ Catálogo de filmes, séries e documentários
 
 ## Como compilar e executar os testes (testes sem JavaFX)
 
-- linux (desconsiderar os erros do OlaJavaFX.java na compilação)
+- linux (desconsiderando o OlaJavaFX.java na compilação)
+
 ```bash
-javac -d out $(find src test -name "*.java" ! -name "OlaJavaFX.java")
+javac -cp "lib\gson-2.11.0.jar" -d out (Get-ChildItem -Path src, test -Recurse -Filter "*.java" | Where-Object { $_.Name -ne "OlaJavaFX.java" }).FullName
 java -ea -cp out test.TesteMidia
 java -ea -cp out test.TesteUsuario
 java -ea -cp out test.TesteServicos
+java -ea -cp "out:lib\gson-2.11.0.jar" test.TesteLeituraJson
 ```
 
-- windows 
+- windows (desconsiderando o OlaJavaFX.java na compilação)
+
 ```bash
-javac -d out (Get-ChildItem -Path src, test -Recurse -Filter "*.java" | Where-Object { $_.Name -ne "OlaJavaFX.java" }).FullName
+javac -cp "lib\gson-2.11.0.jar" -d out (Get-ChildItem -Path src, test -Recurse -Filter "*.java" | Where-Object { $_.Name -ne "OlaJavaFX.java" }).FullName
 java -ea -cp out test.TesteMidia
 java -ea -cp out test.TesteUsuario
 java -ea -cp out test.TesteServicos
+java -ea -cp "out;lib\gson-2.11.0.jar" test.TesteLeituraJson
 ```
 
 Lembrar da flag `-ea`, sem ela o Java ignora os `assert`

@@ -1,0 +1,20 @@
+[
+  {
+    "username": "76ope",
+    "nome": "Jope",
+    "minhaLista": ["Matrix", "Dark"],
+    "avaliacoes": { "Matrix": 9.0, "Dark": 8.5 }
+  },
+  {
+    "username": "trembo_dev",
+    "nome": "Luiz Trembo",
+    "minhaLista": [],
+    "avaliacoes": {}
+  },
+  {
+    "username": "vitinhozip",
+    "nome": "Vitor Gabriel",
+    "minhaLista": ["Free Solo"],
+    "avaliacoes": { "Free Solo": 10.0, "Matrix": 7.0 }
+  }
+]

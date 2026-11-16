@@ -64,7 +64,7 @@ public abstract class Midia implements Avaliavel {
     public void substituirAvaliacao(double notaAntiga, double notaNova) throws NotaInvalidaException {
         validarNota(notaNova);
         removerAvaliacao(notaAntiga);
-        somaNotas=+notaNova;
+        somaNotas+=notaNova;
         quantidadeNotas++;  // add pq removerAvaliacao eh chamado antes
     }
 

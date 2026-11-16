@@ -21,23 +21,26 @@ public class TesteMidia {
         testaNotaInvalida();
         testaTituloVazio();
         testaPolimorfismo();
-        System.out.println("Todos os testes passaram.");
+        testaRemoverAvaliacao();
+        testaSubstituirAvaliacao();
+        testaSubstituirComNotaInvalidaNaoAltera();
+        System.out.println("todos os testes passaram.");
+    }
+
+    static Midia novoFilme() {
+        return new Filme("Matrix", "Ficcao", 1999, 136, "Wachowski");
     }
 
     static void testaNotaMedia() throws NotaInvalidaException {
-        Midia m = new Filme("Matrix", "Ficcao", 1999, 136, "Wachowski");
-        
+        Midia m = novoFilme();
         m.avaliar(8);
-        
         m.avaliar(10);
-        
         assert m.getNotaMedia() == 9.0 : "A media deveria ser 9.0";
-        
         assert m.getQuantidadeAvaliacoes() == 2;
     }
 
     static void testaNotaInvalida() {
-        Midia m = new Filme("Matrix", "Ficcao", 1999, 136, "Wachowski");
+        Midia m = novoFilme();
         boolean lancou = false;
         
         try {
@@ -76,4 +79,47 @@ public class TesteMidia {
         
         assert total == 136 + 1200 + 100 : "Soma das duracoes incorreta: " + total;
     }
+
+    static void testaRemoverAvaliacao() throws NotaInvalidaException {
+        Midia m = novoFilme();
+        m.avaliar(8);
+        m.avaliar(10);
+        m.removerAvaliacao(10);
+
+        assert m.getQuantidadeAvaliacoes() == 1;
+
+        assert m.getNotaMedia() == 8.0 : "A media deveria voltar a 8.0";
+
+        m.removerAvaliacao(8);
+
+        assert m.getNotaMedia() == 0.0 && m.getQuantidadeAvaliacoes() == 0;
+    }
+
+    static void testaSubstituirAvaliacao() throws NotaInvalidaException {
+        Midia m = novoFilme();
+        m.avaliar(8);
+        m.substituirAvaliacao(8, 6);
+        
+        assert m.getQuantidadeAvaliacoes() == 1;
+        
+        assert m.getNotaMedia() == 6.0 : "A media deveria ser 6.0";
+    }
+
+    static void testaSubstituirComNotaInvalidaNaoAltera() throws NotaInvalidaException {
+        Midia m = novoFilme();
+        m.avaliar(8);
+        
+        boolean lancou = false;
+        
+        try {
+            m.substituirAvaliacao(8, 15);
+        } catch (NotaInvalidaException e) {
+            lancou = true;
+        }
+        
+        assert lancou;
+        
+        assert m.getNotaMedia() == 8.0 && m.getQuantidadeAvaliacoes() == 1 : "A nota antiga deveria ser preservada";
+    }
+
 }

@@ -10,10 +10,11 @@ Catálogo de filmes, séries e documentários
 
 - linux (desconsiderar os erros do OlaJavaFX.java na compilação)
 ```bash
-javac -d out $(find src test -name "*.java" ! -name "OlaJavaFX.java")
+javac -cp "lib\gson-2.11.0.jar" -d out (Get-ChildItem -Path src, test -Recurse -Filter "*.java" | Where-Object { $_.Name -ne "OlaJavaFX.java" }).FullName
 java -ea -cp out test.TesteMidia
 java -ea -cp out test.TesteUsuario
 java -ea -cp out test.TesteServicos
+java -ea -cp "out;lib\gson-2.11.0.jar" test.TesteLeituraJson
 ```
 
 - windows 

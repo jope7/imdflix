@@ -34,13 +34,38 @@ public abstract class Midia implements Avaliavel {
     // cada classe informa seu tipo (filme, serie, doc)
     public abstract String getTipo();
 
-    @Override
-    public void avaliar(double nota) throws NotaInvalidaException {
+    private static void validarNota(double nota) throws NotaInvalidaException {
         if (nota < 0 || nota > 10) {
             throw new NotaInvalidaException(nota);
         }
+    }
+
+    @Override
+    public void avaliar(double nota) throws NotaInvalidaException {
+        validarNota(nota);
         somaNotas += nota;
         quantidadeNotas++;
+    }
+
+    @Override
+    public void removerAvaliacao(double nota) {
+        if (quantidadeNotas == 0) {
+            throw new IllegalArgumentException("Nao ha avaliacoes para remover.");
+        }
+
+        somaNotas -= nota;
+        quantidadeNotas--;
+        if (quantidadeNotas == 0) {
+            somaNotas=0;
+        }
+    }
+
+    @Override
+    public void substituirAvaliacao(double notaAntiga, double notaNova) throws NotaInvalidaException {
+        validarNota(notaNova);
+        removerAvaliacao(notaAntiga);
+        somaNotas=+notaNova;
+        quantidadeNotas++;  // add pq removerAvaliacao eh chamado antes
     }
 
     @Override

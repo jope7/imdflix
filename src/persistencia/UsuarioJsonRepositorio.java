@@ -6,7 +6,6 @@ import com.google.gson.JsonObject;
 import excecoes.DadosInvalidosException;
 import excecoes.NotaInvalidaException;
 import java.io.IOException;
-import java.lang.classfile.ClassFile.Option;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -52,6 +51,7 @@ public class UsuarioJsonRepositorio implements UsuarioRepositorio {
         Objects.requireNonNull(caminho, "O caminho do arquivo nao pode ser nulo.");
         Objects.requireNonNull(buscaMidia, "A busca de midias nao pode ser nula.");
         UsuarioJsonRepositorio repositorio = new UsuarioJsonRepositorio(caminho);
+        repositorio.lerArquivo(buscaMidia);
         return repositorio;
     }
 

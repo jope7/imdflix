@@ -11,6 +11,10 @@ public class Documentario extends Midia implements Exibivel {
             throw new IllegalArgumentException("A duracao deve ser positiva.");
         }
 
+        if (tema == null || tema.isBlank()) {
+            throw new IllegalArgumentException("O tema nao pode ser vazio.");
+        }
+
         this.duracaoMinutos = duracaoMinutos;
         this.tema = tema;
     }

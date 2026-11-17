@@ -22,7 +22,7 @@ public abstract class Midia implements Avaliavel {
         }
 
         if (anoLancamento < 1888) {
-            throw new IllegalArgumentException("Ano de lançamento invalido: " + anoLancamento);
+            throw new IllegalArgumentException("Ano de lancamento invalido: " + anoLancamento);
         }
 
         this.titulo = titulo;
@@ -35,7 +35,7 @@ public abstract class Midia implements Avaliavel {
     public abstract String getTipo();
 
     private static void validarNota(double nota) throws NotaInvalidaException {
-        if (nota < 0 || nota > 10) {
+        if (!(nota >= 0 && nota <= 10)) {
             throw new NotaInvalidaException(nota);
         }
     }

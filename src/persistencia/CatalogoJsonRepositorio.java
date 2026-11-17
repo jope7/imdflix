@@ -51,7 +51,7 @@ public class CatalogoJsonRepositorio implements CatalogoRepositorio {
         if (!Files.exists(caminho)) {
             return new ArrayList<>();
         }
-        
+         
         String nome = caminho.getFileName().toString();
 
         String texto;
@@ -83,29 +83,30 @@ public class CatalogoJsonRepositorio implements CatalogoRepositorio {
         }
 
         List<Midia> midias = new ArrayList<>();
-        
         Set<String> vistos = new HashSet<>();
-        
         int posicao = 0;
         
         for (JsonElement item : raiz.getAsJsonArray()) {
             posicao++;
+            
             if (!item.isJsonObject()) {
                 throw new DadosInvalidosException("Item " + posicao + " de " + nome + ": deve ser um objeto JSON.");
             }
+            
             Midia midia;
+            
             try {
                 midia = MidiaFactory.criar(item.getAsJsonObject());
             } catch (DadosInvalidosException e) {
                 throw new DadosInvalidosException("Item " + posicao + " de " + nome + ": " + e.getMessage(), e);
             }
+            
             if (!vistos.add(chave(midia.getTitulo()))) {
                 throw new DadosInvalidosException(
                     "Item " + posicao + " de " + nome + ": titulo duplicado ('" + midia.getTitulo() + "').");
             }
             midias.add(midia);
         }
-        
         return midias;
     }
 
@@ -130,11 +131,8 @@ public class CatalogoJsonRepositorio implements CatalogoRepositorio {
     @Override
     public void salvar(Midia midia) throws IOException {
         Objects.requireNonNull(midia, "A midia nao pode ser nula.");
-        
         List<Midia> atuais = listarTodos();
-        
         String nova = chave(midia.getTitulo());
-        
         boolean substituiu = false;
         
         for (int i = 0; i < atuais.size(); i++) {
@@ -160,7 +158,7 @@ public class CatalogoJsonRepositorio implements CatalogoRepositorio {
         }
         
         Path pasta = caminho.toAbsolutePath().getParent();
-
+        
         if (pasta != null) {
             Files.createDirectories(pasta);
         }
@@ -175,30 +173,21 @@ public class CatalogoJsonRepositorio implements CatalogoRepositorio {
             o.addProperty("tipo", "Filme");
             comuns(o, midia);
             o.addProperty("duracaoMinutos", f.getDuracaoTotalMinutos());
-            
-            if (f.getDiretor() != null) {
-                o.addProperty("diretor", f.getDiretor());
-            }
-
+            o.addProperty("diretor", f.getDiretor());
         } else if (midia instanceof Serie s) {
             o.addProperty("tipo", "Serie");
             comuns(o, midia);
             o.addProperty("temporadas", s.getTemporadas());
             o.addProperty("episodiosPorTemporada", s.getEpisodiosPorTemporada());
             o.addProperty("duracaoMediaEpisodio", s.getDuracaoMediaEpisodio());
-
         } else if (midia instanceof Documentario d) {
             o.addProperty("tipo", "Documentario");
             comuns(o, midia);
             o.addProperty("duracaoMinutos", d.getDuracaoTotalMinutos());
-            
-            if (d.getTema() != null) {
-                o.addProperty("tema", d.getTema());
-            }
+            o.addProperty("tema", d.getTema());
         } else {
             throw new DadosInvalidosException("Tipo de midia nao suportado: " + midia.getClass().getSimpleName());
         }
-        
         return o;
     }
 

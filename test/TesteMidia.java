@@ -24,7 +24,7 @@ public class TesteMidia {
         testaRemoverAvaliacao();
         testaSubstituirAvaliacao();
         testaSubstituirComNotaInvalidaNaoAltera();
-        System.out.println("todos os testes passaram.");
+        System.out.println("✅ TesteMidia - todos os testes passaram..");
     }
 
     static Midia novoFilme() {

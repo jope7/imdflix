@@ -23,7 +23,7 @@ public class TesteMidiaFactory {
         testaCampoComTipoErrado();
         testaDadosRejeitadosPeloConstrutor();
         testaCamposOpcionaisAusentes();
-        System.out.println("todos os testes passaram");
+        System.out.println("✅ TesteMidiaFactory - todos os testes passaram.");
     }
 
     static JsonObject json(String texto) {

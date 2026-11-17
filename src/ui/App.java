@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import modelo.Usuario;
 import servico.Catalogo;
 import servico.GerenciadorUsuarios;
+import modelo.Midia;
 
 public class App extends Application {
     private final Catalogo catalogo = new Catalogo();
@@ -34,8 +35,17 @@ public class App extends Application {
     }
 
     public void mostrarCatalogo() {
-        // provisório: troque pela TelaCatalogo quando ela existir
-        trocarTela(new Label("Bem-vindo, " + usuarioLogado.getNome() + "!"));
+        trocarTela(new TelaCatalogo(this).getRaiz());
+    }
+
+    public void mostrarDetalhe(Midia midia) {
+        // provisório: vai ser substituída por TelaDetalhe
+        trocarTela(new Label("Detalhe de " + midia.getTitulo() + " (em construção)"));
+    }
+
+    public void mostrarMinhaLista() {
+        // provisório: vai ser substituída por TelaMinhaLista
+        trocarTela(new Label("Minha lista (em construção)"));
     }
 
     public Catalogo getCatalogo() { return catalogo; }

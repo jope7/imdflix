@@ -33,7 +33,8 @@ public class TesteCatalogoJson {
         testaItemInvalidoInformaPosicao();
         testaSalvarNaoSobrescreveArquivoInvalido();
         testaArquivoDeExemplo();
-        System.out.println("✅ TesteCatalogoJson - todos os testes passaram");
+        
+        System.out.println("✅ TesteCatalogoJson - todos os testes passaram.");
     }
 
     // ---------- auxiliares ----------
@@ -102,10 +103,11 @@ public class TesteCatalogoJson {
 
         Filme f = (Filme) lidas.get(0);
         assert f.getDiretor().equals("Wachowski") && f.getDuracaoTotalMinutos() == 136 && f.getAnoLancamento() == 1999;
+        
         Serie s = (Serie) lidas.get(1);
         assert s.getTemporadas() == 3 && s.getEpisodiosPorTemporada() == 8 && s.getDuracaoMediaEpisodio() == 50;
-        Documentario d = (Documentario) lidas.get(2);
         
+        Documentario d = (Documentario) lidas.get(2);
         assert d.getTema().equals("Escalada") && d.getGenero().equals("Aventura");
         
         apagar(p);
@@ -130,13 +132,10 @@ public class TesteCatalogoJson {
         Path p = novoCaminho();
         
         CatalogoJsonRepositorio repo = new CatalogoJsonRepositorio(p);
-        
         Filme m = matrix();
         
         m.avaliar(9);
-        
         repo.salvar(m);
-        
         Midia lida = repo.listarTodos().get(0);
         
         assert lida.getQuantidadeAvaliacoes() == 0 && lida.getNotaMedia() == 0.0
@@ -164,9 +163,7 @@ public class TesteCatalogoJson {
 
     static void testaBuscarPorTitulo() throws Exception {
         Path p = novoCaminho();
-        
         CatalogoJsonRepositorio repo = new CatalogoJsonRepositorio(p);
-        
         repo.salvar(matrix());
         
         assert repo.buscarPorTitulo("matrix").isPresent() : "Busca nao diferencia maiusculas";
@@ -180,7 +177,6 @@ public class TesteCatalogoJson {
     static void testaCriaPastaQueNaoExiste() throws Exception {
         Path base = Files.createTempDirectory("cinetech-teste");
         Path p = base.resolve("dados").resolve("catalogo.json");
-        
         new CatalogoJsonRepositorio(p).salvar(matrix());
         
         assert Files.exists(p) : "A pasta e o arquivo deveriam ser criados";
@@ -192,9 +188,7 @@ public class TesteCatalogoJson {
 
     static void testaJsonMalformado() throws Exception {
         Path p = novoCaminho();
-        
         Files.writeString(p, "[ {\"tipo\": ");
-        
         String msg = mensagemDeErro(() -> new CatalogoJsonRepositorio(p).listarTodos());
         
         assert msg != null && msg.contains("malformado") : "JSON malformado deveria lancar DadosInvalidosException";
@@ -204,7 +198,6 @@ public class TesteCatalogoJson {
 
     static void testaRaizNaoEhLista() throws Exception {
         Path p = novoCaminho();
-        
         Files.writeString(p, "{\"tipo\":\"Filme\"}");
         
         assert mensagemDeErro(() -> new CatalogoJsonRepositorio(p).listarTodos()) != null
@@ -215,7 +208,6 @@ public class TesteCatalogoJson {
 
     static void testaItemNaoEhObjeto() throws Exception {
         Path p = novoCaminho();
-        
         Files.writeString(p, "[1, 2]");
         
         assert mensagemDeErro(() -> new CatalogoJsonRepositorio(p).listarTodos()) != null
@@ -226,11 +218,9 @@ public class TesteCatalogoJson {
 
     static void testaTituloDuplicadoNoArquivo() throws Exception {
         Path p = novoCaminho();
-        
         Files.writeString(p, "["
-            + "{\"tipo\":\"Filme\",\"titulo\":\"Matrix\",\"genero\":\"A\",\"ano\":1999,\"duracaoMinutos\":100},"
-            + "{\"tipo\":\"Filme\",\"titulo\":\"matrix\",\"genero\":\"B\",\"ano\":2003,\"duracaoMinutos\":100}]");
-        
+            + "{\"tipo\":\"Filme\",\"titulo\":\"Matrix\",\"genero\":\"A\",\"ano\":1999,\"duracaoMinutos\":100,\"diretor\":\"D\"},"
+            + "{\"tipo\":\"Filme\",\"titulo\":\"matrix\",\"genero\":\"B\",\"ano\":2003,\"duracaoMinutos\":100,\"diretor\":\"D\"}]");
         String msg = mensagemDeErro(() -> new CatalogoJsonRepositorio(p).listarTodos());
         
         assert msg != null && msg.contains("duplicado") : "Titulo duplicado no arquivo deveria ser rejeitado";
@@ -240,25 +230,21 @@ public class TesteCatalogoJson {
 
     static void testaItemInvalidoInformaPosicao() throws Exception {
         Path p = novoCaminho();
-        
         Files.writeString(p, "["
-            + "{\"tipo\":\"Filme\",\"titulo\":\"Matrix\",\"genero\":\"A\",\"ano\":1999,\"duracaoMinutos\":100},"
-            + "{\"tipo\":\"Filme\",\"titulo\":\"Quebrado\",\"genero\":\"A\",\"ano\":1999}]");
-        
+            + "{\"tipo\":\"Filme\",\"titulo\":\"Matrix\",\"genero\":\"A\",\"ano\":1999,\"duracaoMinutos\":100,\"diretor\":\"D\"},"
+            + "{\"tipo\":\"Filme\",\"titulo\":\"Quebrado\",\"genero\":\"A\",\"ano\":1999,\"diretor\":\"D\"}]");
         String msg = mensagemDeErro(() -> new CatalogoJsonRepositorio(p).listarTodos());
         
-        assert msg != null && msg.contains("Item 2") : "A mensagem deveria dizer qual item esta errado: " + msg;
+        assert msg != null && msg.contains("Item 2") && msg.contains("duracaoMinutos")
+            : "A mensagem deveria dizer qual item e qual campo estao errados: " + msg;
         
         apagar(p);
     }
 
     static void testaSalvarNaoSobrescreveArquivoInvalido() throws Exception {
         Path p = novoCaminho();
-        
         String conteudoRuim = "[ isto nao e json";
-        
         Files.writeString(p, conteudoRuim);
-        
         String msg = mensagemDeErro(() -> new CatalogoJsonRepositorio(p).salvar(matrix()));
         
         assert msg != null : "Salvar sobre arquivo invalido deveria lancar excecao";

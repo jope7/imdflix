@@ -26,6 +26,10 @@ java -ea -cp out test.TesteMidia
 java -ea -cp out test.TesteUsuario
 java -ea -cp out test.TesteServicos
 java -ea -cp "out;lib\gson-2.11.0.jar" test.TesteLeituraJson
-```
+java -ea -cp "out;lib\gson-2.11.0.jar" test.TesteLeituraJson
+CatalogoJson
+java -ea -cp "out;lib\gson-2.11.0.jar" test.TesteLeituraJson
+MidiaFactory
+
 
 Lembrar da flag `-ea`, sem ela o Java ignora os `assert`

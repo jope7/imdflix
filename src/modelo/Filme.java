@@ -11,6 +11,10 @@ public class Filme extends Midia implements Exibivel {
             throw new IllegalArgumentException("A duracao deve ser positiva.");
         }
 
+        if (diretor == null || diretor.isBlank()) {
+           throw new IllegalArgumentException("O diretor nao pode ser vazio.");
+        }
+
         this.duracaoMinutos = duracaoMinutos;
         this.diretor = diretor;
     }

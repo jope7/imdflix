@@ -15,7 +15,7 @@ public class TesteUsuario {
         testaAvaliarEReavaliar();
         testaReavaliarComNotaInvalidaPreservaAnterior();
         testaDoisUsuariosAvaliandoMesmaMidia();
-        System.out.println("todos os testes passaram.");
+        System.out.println("✅ TesteUsuario - todos os testes passaram.");
     }
 
     static Midia novoFilme() {

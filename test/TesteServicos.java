@@ -17,7 +17,7 @@ public class TesteServicos {
         testaEntrar();
         testaTituloDuplicado();
         testaBuscaEFiltro();
-        System.out.println("todos os testes passaram.");
+        System.out.println("✅ TesteServicos - todos os testes passaram.");
     }
 
     static void testaUsernameDuplicado() throws Exception {

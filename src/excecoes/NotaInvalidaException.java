@@ -5,7 +5,7 @@ package excecoes;
 */
 public class NotaInvalidaException extends Exception {    
     public NotaInvalidaException(double nota) {
-        super("Nota invvalida: " + nota + ". A nota deve estar entre 0 e 10.");
+        super("Nota inválida: " + nota + ". A nota deve estar entre 0 e 10.");
     }
 
 }

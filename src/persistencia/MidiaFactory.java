@@ -17,6 +17,43 @@ public final class MidiaFactory {
 
     private MidiaFactory() {}
 
+    public static Midia criar(JsonObject dados) throws DadosInvalidosException {
+        String tipo = texto(dados, "tipo");
+        String titulo = texto(dados, "titulo");
+        
+        try {
+            return switch (tipo.trim().toLowerCase()) {
+                case "filme" -> new Filme(
+                    titulo,
+                    texto(dados, "genero"),
+                    inteiro(dados, "ano"),
+                    inteiro(dados, "duracaoMinutos"),
+                    texto(dados, "diretor"));
+                
+                case "serie" -> new Serie(
+                    titulo,
+                    texto(dados, "genero"),
+                    inteiro(dados, "ano"),
+                    inteiro(dados, "temporadas"),
+                    inteiro(dados, "episodiosPorTemporada"),
+                    inteiro(dados, "duracaoMediaEpisodio"));
+                
+                case "documentario" -> new Documentario(
+                    titulo,
+                    texto(dados, "genero"),
+                    inteiro(dados, "ano"),
+                    inteiro(dados, "duracaoMinutos"),
+                    texto(dados, "tema"));
+                
+                default -> throw new DadosInvalidosException(
+                    "Tipo desconhecido: '" + tipo + "'. Use Filme, Serie ou Documentario.");
+            };
+
+        } catch (IllegalArgumentException e) {
+            throw new DadosInvalidosException("Dados invalidos para '" + titulo + "': " + e.getMessage(), e);
+        }
+    }
+
     private static JsonPrimitive primitivo(JsonObject dados, String campo) throws DadosInvalidosException {
         JsonElement elemento = dados.get(campo);
         
@@ -41,16 +78,6 @@ public final class MidiaFactory {
         return p.getAsString();
     }
 
-    private static String textoOpcional(JsonObject dados, String campo) throws DadosInvalidosException {
-        JsonElement elemento = dados.get(campo);
-        
-        if (elemento == null || elemento.isJsonNull()) {
-            return null;
-        }
-        
-        return texto(dados, campo);
-    }
-
     private static int inteiro(JsonObject dados, String campo) throws DadosInvalidosException {
         JsonPrimitive p = primitivo(dados, campo);
         
@@ -63,46 +90,7 @@ public final class MidiaFactory {
         if (valor != Math.rint(valor) || Math.abs(valor) > Integer.MAX_VALUE) {
             throw new DadosInvalidosException("O campo '" + campo + "' deve ser um numero inteiro.");
         }
-        
+
         return (int) valor;
     }
-
-    public static Midia criar(JsonObject dados) throws DadosInvalidosException {
-        String tipo = texto(dados, "tipo");
-        String titulo = texto(dados, "titulo");
-        
-        try {
-            return switch (tipo.trim().toLowerCase()) {
-                case "filme" -> new Filme(
-                    titulo,
-                    texto(dados, "genero"),
-                    inteiro(dados, "ano"),
-                    inteiro(dados, "duracaoMinutos"),
-                    textoOpcional(dados, "diretor"));
-                
-                case "serie" -> new Serie(
-                    titulo,
-                    texto(dados, "genero"),
-                    inteiro(dados, "ano"),
-                    inteiro(dados, "temporadas"),
-                    inteiro(dados, "episodiosPorTemporada"),
-                    inteiro(dados, "duracaoMediaEpisodio"));
-                
-                case "documentario" -> new Documentario(
-                    titulo,
-                    texto(dados, "genero"),
-                    inteiro(dados, "ano"),
-                    inteiro(dados, "duracaoMinutos"),
-                    textoOpcional(dados, "tema"));
-                
-                default -> throw new DadosInvalidosException(
-                    "Tipo desconhecido: '" + tipo + "'. Use Filme, Serie ou Documentario.");
-            };
-            
-        } catch (IllegalArgumentException e) {
-            throw new DadosInvalidosException("Dados invalidos para '" + titulo + "': " + e.getMessage(), e);
-        }
-    
-    }
-
 }

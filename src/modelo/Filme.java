@@ -1,9 +1,20 @@
 package modelo;
 
+/**
+ * Filme: uma mídia com duração única e um diretor.
+ */
 public class Filme extends Midia implements Exibivel {
     private final int duracaoMinutos;
     private final String diretor;
 
+    /**
+     * @param titulo título (não pode ser vazio)
+     * @param genero gênero (não pode ser vazio)
+     * @param anoLancamento ano de lançamento (a partir de 1888)
+     * @param duracaoMinutos duração em minutos (positiva)
+     * @param diretor nome do diretor (não pode ser vazio)
+     * @throws IllegalArgumentException se algum dado for inválido
+     */
     public Filme(String titulo, String genero, int anoLancamento, int duracaoMinutos, String diretor) {
         super(titulo, genero, anoLancamento);
 
@@ -34,6 +45,7 @@ public class Filme extends Midia implements Exibivel {
         return duracaoMinutos + " min, dirigido por " + diretor;
     }
 
+    /** @return o nome do diretor */
     public String getDiretor() {
         return diretor;
     }

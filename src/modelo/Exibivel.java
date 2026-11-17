@@ -1,10 +1,12 @@
 package modelo;
 
-/*
-    tudo que pode ser exibido ao usuario com uma duracao final
-*/
+/**
+ * Tudo que pode ser exibido ao usuário com uma duração final.
+ */
 public interface Exibivel {
-    public int getDuracaoTotalMinutos();
+    /** @return a duração total, em minutos */
+    int getDuracaoTotalMinutos();
     
+    /** @return um texto curto descrevendo o que será exibido */
     String getResumoExibicao();    
 } 

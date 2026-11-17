@@ -10,11 +10,16 @@ import java.util.regex.Pattern;
 
 import excecoes.NotaInvalidaException;
 
-/*
-    o username eh o ID (imutavel e n diferencia maiusculas e minusculas)
-    o nome é apenas para exibicao e pode se repetir entre usuarios
-    lista e avaliacoes guardam apenas o titulo da midia, n o obj
-*/
+/**
+ * Usuário do sistema, com a sua lista ("Minha lista") e as suas avaliações.
+ * <ul>
+ *   <li>O {@code username} é o ID: imutável e sem diferenciar maiúsculas de minúsculas.</li>
+ *   <li>O {@code nome} serve apenas para exibição e pode se repetir entre usuários.</li>
+ *   <li>A lista e as avaliações guardam apenas o título da mídia, nunca o objeto.</li>
+ *   <li>A lista não tem duplicados e cada usuário tem no máximo uma nota por mídia
+ *       (reavaliar substitui a nota anterior).</li>
+ * </ul>
+ */
 public class Usuario {
     // padrao
     private static final Pattern FORMATO_USERNAME = Pattern.compile("^[a-z0-9_]{3,20}$");
@@ -24,11 +29,75 @@ public class Usuario {
     private final List<String> minhaLista = new ArrayList<>();
     private final Map<String, Double> avaliacoes = new LinkedHashMap<>();
 
+    /**
+     * Cria um usuário novo, com lista e avaliações vazias.
+     *
+     * @param username ID do usuário (3 a 20 caracteres entre letras, números e {@code _})
+     * @param nome nome de exibição (não pode ser vazio)
+     * @throws IllegalArgumentException se o username ou o nome forem inválidos
+     */
     public Usuario(String username, String nome) {
         this.username = normalizarUsername(username);
         setNome(nome);
     }
 
+    /**
+     * Reconstrói um usuário a partir de dados já persistidos (ex.: lidos do JSON).
+     * <p>
+     * Só preenche o próprio usuário: <b>não altera nenhuma mídia</b>, ou seja, as notas
+     * médias e as quantidades de avaliações das mídias continuam como estavam. Para
+     * refletir as notas restauradas nas mídias use
+     * {@link servico.Catalogo#aplicarAvaliacoes(java.util.Collection)}.
+     * Títulos repetidos na lista são ignorados.
+     *
+     * @param username ID do usuário
+     * @param nome nome de exibição
+     * @param minhaLista títulos da lista (pode ser {@code null}, equivale a vazia)
+     * @param avaliacoes nota por título (pode ser {@code null}, equivale a vazio)
+     * @return o usuário restaurado
+     * @throws NotaInvalidaException se alguma nota estiver fora do intervalo de 0 a 10
+     * @throws IllegalArgumentException se o username, o nome ou algum título forem inválidos
+     */
+    public static Usuario restaurar(String username, String nome, List<String> minhaLista,
+            Map<String, Double> avaliacoes) throws NotaInvalidaException {
+        Usuario usuario = new Usuario(username, nome);
+
+        if (minhaLista != null) {
+            for (String titulo : minhaLista) {
+                validarTitulo(titulo);
+                if (!usuario.minhaLista.contains(titulo)) {
+                    usuario.minhaLista.add(titulo);
+                }
+            }
+        }
+
+        if (avaliacoes != null) {
+            for (Map.Entry<String, Double> e : avaliacoes.entrySet()) {
+                validarTitulo(e.getKey());
+                Double nota = e.getValue();
+                if (nota == null) {
+                    throw new IllegalArgumentException("Nota ausente para o titulo '" + e.getKey() + "'.");
+                }
+                Midia.validarNota(nota);
+                usuario.avaliacoes.put(e.getKey(), nota);
+            }
+        }
+        return usuario;
+    }
+
+    private static void validarTitulo(String titulo) {
+        if (titulo == null || titulo.isBlank()) {
+            throw new IllegalArgumentException("O titulo nao pode ser vazio.");
+        }
+    }
+
+    /**
+     * Normaliza um username: remove espaços das pontas e converte para minúsculas.
+     *
+     * @param username username informado
+     * @return o username normalizado
+     * @throws IllegalArgumentException se for nulo ou não seguir o formato permitido
+     */
     public static String normalizarUsername(String username) {
         if (username == null) {
             throw new IllegalArgumentException("O username nao pode ser nulo");
@@ -42,16 +111,35 @@ public class Usuario {
         return normalizado;
     }
 
+    /**
+     * Adiciona a mídia à lista do usuário. Se ela já estiver na lista, nada acontece.
+     *
+     * @param midia mídia a adicionar
+     */
     public void adicionarNaLista(Midia midia) {
         if (!minhaLista.contains(midia.getTitulo())) {
             minhaLista.add(midia.getTitulo());
         }
     }
 
+    /**
+     * Remove a mídia da lista do usuário. Se ela não estiver na lista, nada acontece.
+     *
+     * @param midia mídia a remover
+     */
     public void removerDaLista(Midia midia) {
         minhaLista.remove(midia.getTitulo());
     }
 
+    /**
+     * Registra a nota do usuário para a mídia. Se o usuário já avaliou essa mídia, a nota
+     * anterior é substituída (a mídia não conta duas avaliações do mesmo usuário). Se a nota
+     * for inválida, nada é alterado.
+     *
+     * @param midia mídia avaliada
+     * @param nota nota de 0 a 10
+     * @throws NotaInvalidaException se a nota estiver fora do intervalo de 0 a 10
+     */
     public void avaliar(Midia midia, double nota) throws NotaInvalidaException {
         Double anterior = avaliacoes.get(midia.getTitulo());
         if (anterior == null) {
@@ -63,14 +151,22 @@ public class Usuario {
         avaliacoes.put(midia.getTitulo(), nota);
     }
 
+    /** @return o username (ID) já normalizado */
     public String getUsername() {
         return username;
     }
 
+    /** @return o nome de exibição */
     public String getNome() {
         return nome;
     }
 
+    /**
+     * Altera o nome de exibição.
+     *
+     * @param nome novo nome (não pode ser vazio)
+     * @throws IllegalArgumentException se o nome for nulo ou em branco
+     */
     public void setNome(String nome) {
         if (nome == null || nome.isBlank()) {
             throw new IllegalArgumentException("O nome nao pode ser vazio.");
@@ -78,10 +174,12 @@ public class Usuario {
         this.nome = nome;
     }
 
+    /** @return visão somente leitura dos títulos da lista */
     public List<String> getMinhaLista() {
         return Collections.unmodifiableList(minhaLista);
     }
 
+    /** @return visão somente leitura das notas, por título */
     public Map<String, Double> getAvaliacoes() {
         return Collections.unmodifiableMap(avaliacoes);
     }

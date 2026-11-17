@@ -31,6 +31,7 @@ classDiagram
         -double somaNotas
         -int quantidadeNotas
         +getTipo()* String
+        +validarNota(double nota)$ void
         +getTitulo() String
         +getGenero() String
         +getAnoLancamento() int
@@ -57,6 +58,7 @@ classDiagram
         -String nome
         -List~String~ minhaLista
         -Map~String, Double~ avaliacoes
+        +restaurar(String username, String nome, List~String~ minhaLista, Map~String, Double~ avaliacoes)$ Usuario
         +normalizarUsername(String username)$ String
         +adicionarNaLista(Midia midia) void
         +removerDaLista(Midia midia) void
@@ -66,16 +68,22 @@ classDiagram
     }
 
     class Catalogo {
+        -CatalogoRepositorio repositorio
         -Map~String, Midia~ midias
+        +Catalogo(CatalogoRepositorio repositorio)
         +cadastrar(Midia midia) void
         +buscarPorTitulo(String titulo) Optional~Midia~
         +filtrarPorGenero(String genero) List~Midia~
         +listarTodos() List~Midia~
+        +aplicarAvaliacoes(Collection~Usuario~ usuarios) void
     }
 
     class GerenciadorUsuarios {
+        -UsuarioRepositorio repositorio
         -Map~String, Usuario~ usuarios
+        +GerenciadorUsuarios(UsuarioRepositorio repositorio)
         +cadastrar(String username, String nome) Usuario
+        +salvar(Usuario usuario) void
         +entrar(String username) Optional~Usuario~
         +listarTodos() List~Usuario~
     }
@@ -104,6 +112,8 @@ classDiagram
         +buscarPorUsername(String username) Optional~Usuario~
     }
 
+    class CatalogoJsonRepositorio
+
     Avaliavel <|.. Midia
     Midia <|-- Filme
     Midia <|-- Serie
@@ -115,6 +125,10 @@ classDiagram
     Usuario ..> Midia : avalia
     Catalogo o-- Midia : contém
     GerenciadorUsuarios o-- Usuario : contém
+    Catalogo --> CatalogoRepositorio : recebe no construtor
+    GerenciadorUsuarios --> UsuarioRepositorio : recebe no construtor
+    CatalogoRepositorio <|.. CatalogoJsonRepositorio
+    Catalogo ..> Usuario : aplicarAvaliacoes
 
     Midia ..> NotaInvalidaException : lança
     Catalogo ..> TituloDuplicadoException : lança
@@ -178,8 +192,6 @@ classDiagram
     UsuarioRepositorio <|.. UsuarioJsonRepositorio
     CatalogoJsonRepositorio ..> MidiaFactory : usa
     MidiaFactory ..> Midia : cria
-    Catalogo ..> CatalogoRepositorio : persiste via
-    GerenciadorUsuarios ..> UsuarioRepositorio : persiste via
     Catalogo ..> RecomendacaoStrategy : usa
     RecomendacaoStrategy <|.. RecomendacaoPorGenero
     RecomendacaoStrategy <|.. RecomendacaoPorNota

@@ -4,6 +4,9 @@ import excecoes.NotaInvalidaException;
 import modelo.Filme;
 import modelo.Midia;
 import modelo.Usuario;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 public class TesteUsuario {
     
@@ -15,6 +18,13 @@ public class TesteUsuario {
         testaAvaliarEReavaliar();
         testaReavaliarComNotaInvalidaPreservaAnterior();
         testaDoisUsuariosAvaliandoMesmaMidia();
+        testaRestaurarPreencheListaEAvaliacoes();
+        testaRestaurarNaoAlteraMidia();
+        testaRestaurarIgnoraTitulosDuplicados();
+        testaRestaurarAceitaNulos();
+        testaRestaurarRejeitaDadosInvalidos();
+        testaReavaliarUsuarioRestauradoDepoisDeAplicarNotas();
+        testaRemoverDaListaDeMidiaAusente();
         System.out.println("✅ TesteUsuario - todos os testes passaram.");
     }
 
@@ -90,5 +100,80 @@ public class TesteUsuario {
         assert m.getQuantidadeAvaliacoes() == 2 && m.getNotaMedia() == 8.0;
         beto.avaliar(m, 8);
         assert m.getNotaMedia() == 9.0 : "A media deveria considerar a nova nota do Beto";
+    }
+
+    static void testaRestaurarPreencheListaEAvaliacoes() throws Exception {
+        Usuario u = Usuario.restaurar("  ANA01 ", "Ana", List.of("Matrix", "Dark"), Map.of("Matrix", 9.0));
+        assert u.getUsername().equals("ana01");
+        assert u.getNome().equals("Ana");
+        assert u.getMinhaLista().equals(List.of("Matrix", "Dark"));
+        assert u.getAvaliacoes().get("Matrix") == 9.0;
+    }
+
+    static void testaRestaurarNaoAlteraMidia() throws Exception {
+        Midia m = novoFilme();
+        Usuario.restaurar("ana01", "Ana", List.of("Matrix"), Map.of("Matrix", 9.0));
+        assert m.getQuantidadeAvaliacoes() == 0 && m.getNotaMedia() == 0.0 : "Restaurar nao pode mexer em nenhuma midia";
+    }
+
+    static void testaRestaurarIgnoraTitulosDuplicados() throws Exception {
+        Usuario u = Usuario.restaurar("ana01", "Ana", List.of("Matrix", "Matrix"), null);
+        assert u.getMinhaLista().size() == 1;
+    }
+
+    static void testaRestaurarAceitaNulos() throws Exception {
+        Usuario u = Usuario.restaurar("ana01", "Ana", null, null);
+        assert u.getMinhaLista().isEmpty() && u.getAvaliacoes().isEmpty();
+    }
+
+    static void testaRestaurarRejeitaDadosInvalidos() {
+        boolean notaInvalida = false;
+        try {
+            Usuario.restaurar("ana01", "Ana", null, Map.of("Matrix", 11.0));
+        } catch (NotaInvalidaException e) {
+            notaInvalida = true;
+        }
+        assert notaInvalida : "Nota fora de 0..10 deveria ser rejeitada";
+
+        Map<String, Double> notaNula = new LinkedHashMap<>();
+        notaNula.put("Matrix", null);
+        boolean lancou = false;
+        try {
+            Usuario.restaurar("ana01", "Ana", null, notaNula);
+        } catch (IllegalArgumentException | NotaInvalidaException e) {
+            lancou = true;
+        }
+        assert lancou : "Nota nula deveria ser rejeitada";
+
+        lancou = false;
+        try {
+            Usuario.restaurar("ab", "Ana", null, null);
+        } catch (IllegalArgumentException | NotaInvalidaException e) {
+            lancou = true;
+        }
+        assert lancou : "Username invalido deveria ser rejeitado";
+
+        lancou = false;
+        try {
+            Usuario.restaurar("ana01", "Ana", List.of(" "), null);
+        } catch (IllegalArgumentException | NotaInvalidaException e) {
+            lancou = true;
+        }
+        assert lancou : "Titulo vazio na lista deveria ser rejeitado";
+    }
+
+    // Usuario restaurado + notas reaplicadas na midia: reavaliar continua substituindo
+    static void testaReavaliarUsuarioRestauradoDepoisDeAplicarNotas() throws Exception {
+        Midia m = novoFilme();
+        Usuario u = Usuario.restaurar("ana01", "Ana", null, Map.of("Matrix", 8.0));
+        m.avaliar(8.0); // o que Catalogo.aplicarAvaliacoes faz ao iniciar
+        u.avaliar(m, 4);
+        assert m.getQuantidadeAvaliacoes() == 1 && m.getNotaMedia() == 4.0;
+    }
+
+    static void testaRemoverDaListaDeMidiaAusente() {
+        Usuario u = new Usuario("ana01", "Ana");
+        u.removerDaLista(novoFilme());
+        assert u.getMinhaLista().isEmpty();
     }
 }

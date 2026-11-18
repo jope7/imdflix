@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import modelo.Exibivel;
 import modelo.Midia;
+import java.io.IOException;
 
 public class TelaDetalhe {
     private final App app;
@@ -78,6 +79,7 @@ public class TelaDetalhe {
         try {
             double nota = Double.parseDouble(txtNota.getText());
             app.getUsuarioLogado().avaliar(midia, nota);
+            app.getGerenciador().salvar(app.getUsuarioLogado());
             lblErro.setText("");
             atualizarNotas();
             lblSucesso.setText("Avaliação registrada.");
@@ -87,15 +89,24 @@ public class TelaDetalhe {
         } catch (NumberFormatException e) {
             lblSucesso.setText("");
             lblErro.setText("Digite um número, ex.: 7.5");
+        } catch (IOException e) {
+            lblSucesso.setText("");
+            lblErro.setText("Erro ao salvar os dados do usuários.");
         }
     }
 
     private void adicionarNaLista() {
-        lblErro.setText("");
-        app.getUsuarioLogado().adicionarNaLista(midia);
-        lblSucesso.setText("Adicionado à sua lista.");
-        btnAdicionar.setDisable(true);
-        btnAdicionar.setText("Já está na sua lista");
+        try {
+            lblErro.setText("");
+            app.getUsuarioLogado().adicionarNaLista(midia);
+            app.getGerenciador().salvar(app.getUsuarioLogado());
+            lblSucesso.setText("Adicionado à sua lista.");
+            btnAdicionar.setDisable(true);
+            btnAdicionar.setText("Já está na sua lista");
+        } catch (IOException e) {
+            lblSucesso.setText("");
+            lblErro.setText("Erro ao salvar dados do usuário.");
+        }
     }
 
     public VBox getRaiz() {

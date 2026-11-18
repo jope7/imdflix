@@ -8,7 +8,6 @@ import modelo.Filme;
 import modelo.Serie;
 import modelo.Usuario;
 import java.io.IOException;
-import java.util.List;
 import servico.Catalogo;
 import servico.GerenciadorUsuarios;
 

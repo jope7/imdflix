@@ -63,7 +63,7 @@ public class TesteUsuarioJson {
     }
 
     static Catalogo catalogo() throws Exception {
-        Catalogo c = new Catalogo();
+        Catalogo c = new Catalogo(new RepositoriosEmMemoria.Catalogo());
 
         c.cadastrar(new Filme("Matrix", "Ficcao", 1999, 136, "Wachowski"));
         c.cadastrar(new Serie("Dark", "Suspense", 2017, 3, 8, 50));
@@ -313,7 +313,7 @@ public class TesteUsuarioJson {
         Path p = novoCaminho();
         escrever(p, "[{'username':'ana01','nome':'Ana','minhaLista':['Matrix','Dark'],"
             + "'avaliacoes':{'Matrix':9.0,'Dark':8.0}}]");
-        Catalogo semMatrix = new Catalogo();
+        Catalogo semMatrix = new Catalogo(new RepositoriosEmMemoria.Catalogo());
         semMatrix.cadastrar(new Serie("Dark", "Suspense", 2017, 3, 8, 50));
         UsuarioJsonRepositorio repo = carregar(p, semMatrix);
         
@@ -365,11 +365,7 @@ public class TesteUsuarioJson {
             return;
         }
         
-        Catalogo c = new Catalogo();
-        
-        for (Midia m : new CatalogoJsonRepositorio(catalogoExemplo).listarTodos()) {
-            c.cadastrar(m);
-        }
+        Catalogo c = new Catalogo(new CatalogoJsonRepositorio(catalogoExemplo));
         
         UsuarioJsonRepositorio repo = carregar(usuariosExemplo, c);
         

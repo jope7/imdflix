@@ -1,5 +1,7 @@
 package ui;
 
+import java.io.IOException;
+
 import excecoes.TituloDuplicadoException;
 import excecoes.UsernameJaExisteException;
 import modelo.Documentario;
@@ -14,7 +16,7 @@ import servico.GerenciadorUsuarios;
 public class DadosIniciais {
 
     public static void carregar(Catalogo catalogo, GerenciadorUsuarios gerenciador)
-            throws TituloDuplicadoException, UsernameJaExisteException {
+            throws TituloDuplicadoException, UsernameJaExisteException, IOException {
         catalogo.cadastrar(new Filme("Matrix", "Ficção", 1999, 136, "Wachowski"));
         catalogo.cadastrar(new Filme("Interestelar", "Ficção", 2014, 169, "Christopher Nolan"));
         catalogo.cadastrar(new Serie("Dark", "Suspense", 2017, 3, 8, 50));

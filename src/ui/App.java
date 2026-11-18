@@ -3,23 +3,25 @@ package ui;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import modelo.Usuario;
+import servico.CarregadorDados;
 import servico.Catalogo;
 import servico.GerenciadorUsuarios;
 import modelo.Midia;
 
 public class App extends Application {
-    private final Catalogo catalogo = new Catalogo();
-    private final GerenciadorUsuarios gerenciador = new GerenciadorUsuarios();
+    private Catalogo catalogo;
+    private GerenciadorUsuarios gerenciador;
     private Usuario usuarioLogado;
     private Stage stage;
 
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
-        DadosIniciais.carregar(catalogo, gerenciador);
+        var dados = CarregadorDados.padrao().carregar();
+        this.catalogo = dados.catalogo();
+        this.gerenciador = new GerenciadorUsuarios(dados.usuarioRepositorio());
         stage.setTitle("IMDFlix");
         mostrarLogin();
         stage.show();

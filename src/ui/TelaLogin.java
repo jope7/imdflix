@@ -1,6 +1,8 @@
 package ui;
 
 import excecoes.UsernameJaExisteException;
+
+import java.io.IOException;
 import java.util.Optional;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -66,6 +68,8 @@ public class TelaLogin {
             app.mostrarCatalogo();
         } catch (UsernameJaExisteException | IllegalArgumentException e) {
             lblErro.setText(e.getMessage());
+        } catch (IOException e) {
+            lblErro.setText("Erro ao salvar os dados do usuário.");
         }
     }
 

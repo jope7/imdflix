@@ -1,11 +1,8 @@
 package servico;
 
-import excecoes.DadosInvalidosException;
-import excecoes.TituloDuplicadoException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Objects;
-import modelo.Midia;
 import persistencia.CatalogoJsonRepositorio;
 import persistencia.CatalogoRepositorio;
 import persistencia.UsuarioJsonRepositorio;
@@ -53,16 +50,7 @@ public class CarregadorDados {
     public DadosCarregados carregar() throws IOException {
         // 1 catalogo
         CatalogoJsonRepositorio catalogoRepositorio = new CatalogoJsonRepositorio(caminhoCatalogo);
-        Catalogo catalogo = new Catalogo();
-
-        for (Midia midia : catalogoRepositorio.listarTodos()) {
-            try {
-                catalogo.cadastrar(midia);
-            } catch (TituloDuplicadoException e) {
-                // o repositorio ja rejeita duplicados, isso é so uma segunda garantia
-                throw new DadosInvalidosException("Catalogo invalido: " + e.getMessage(), e);
-            }
-        }
+        Catalogo catalogo = new Catalogo(catalogoRepositorio);
 
         // 2 usuarios (recalcula as medias das midias do catalogo ja carregado)
         UsuarioJsonRepositorio usuarioRepositorio = UsuarioJsonRepositorio.carregar(caminhoUsuarios, catalogo::buscarPorTitulo);

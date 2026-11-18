@@ -39,13 +39,11 @@ public class App extends Application {
     }
 
     public void mostrarDetalhe(Midia midia) {
-        // provisório: vai ser substituída por TelaDetalhe
-        trocarTela(new Label("Detalhe de " + midia.getTitulo() + " (em construção)"));
+        trocarTela(new TelaDetalhe(this, midia).getRaiz());
     }
 
     public void mostrarMinhaLista() {
-        // provisório: vai ser substituída por TelaMinhaLista
-        trocarTela(new Label("Minha lista (em construção)"));
+        trocarTela(new TelaMinhaLista(this).getRaiz());
     }
 
     public Catalogo getCatalogo() { return catalogo; }

@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import modelo.Midia;
+import java.io.IOException;
 
 public class TelaMinhaLista {
     private final App app;
@@ -80,9 +81,14 @@ public class TelaMinhaLista {
         if (resultado.isEmpty()) {
             lblErro.setText("Este título não está mais no catálogo.");
         } else {
-            app.getUsuarioLogado().removerDaLista(resultado.get());
-            atualizarLista();
-            lblErro.setText("");
+            try {
+                app.getUsuarioLogado().removerDaLista(resultado.get());
+                app.getGerenciador().salvar(app.getUsuarioLogado());
+                atualizarLista();
+                lblErro.setText("");
+            } catch (IOException e) {
+                lblErro.setText("Erro ao salvar os dados do usuário.");
+            }
         }
     }
 

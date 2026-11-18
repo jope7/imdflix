@@ -9,11 +9,11 @@ import servico.CarregadorDados;
 import servico.Catalogo;
 import servico.GerenciadorUsuarios;
 import modelo.Midia;
+import servico.SessaoUsuario;
 
 public class App extends Application {
     private Catalogo catalogo;
     private GerenciadorUsuarios gerenciador;
-    private Usuario usuarioLogado;
     private Stage stage;
 
     @Override
@@ -32,7 +32,7 @@ public class App extends Application {
     }
 
     public void mostrarLogin() {
-        usuarioLogado = null;
+        SessaoUsuario.getInstancia().sair();
         trocarTela(new TelaLogin(this).getRaiz());
     }
 
@@ -50,8 +50,12 @@ public class App extends Application {
 
     public Catalogo getCatalogo() { return catalogo; }
     public GerenciadorUsuarios getGerenciador() { return gerenciador; }
-    public Usuario getUsuarioLogado() { return usuarioLogado; }
-    public void setUsuarioLogado(Usuario usuario) { this.usuarioLogado = usuario; }
+    public Usuario getUsuarioLogado() { 
+        return SessaoUsuario.getInstancia().getUsuarioAtual().orElseThrow();
+    }
+    public void setUsuarioLogado(Usuario usuario) { 
+        SessaoUsuario.getInstancia().entrar(usuario);
+    }
 
     public static void main(String[] args) {
         launch(args);

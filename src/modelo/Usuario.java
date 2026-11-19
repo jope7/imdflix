@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
-
 import excecoes.NotaInvalidaException;
 
 /**
@@ -47,7 +46,8 @@ public class Usuario {
      * Só preenche o próprio usuário: <b>não altera nenhuma mídia</b>, ou seja, as notas
      * médias e as quantidades de avaliações das mídias continuam como estavam. Para
      * refletir as notas restauradas nas mídias use
-     * {@link servico.Catalogo#aplicarAvaliacoes(java.util.Collection)}.
+     * {@link servico.Catalogo#aplicarAvaliacoes(java.util.Collection)} (e só uma vez: o fluxo
+     * normal com o {@code UsuarioJsonRepositorio} já aplica as notas sozinho).
      * Títulos repetidos na lista são ignorados.
      *
      * @param username ID do usuário
@@ -167,7 +167,7 @@ public class Usuario {
      * @param nome novo nome (não pode ser vazio)
      * @throws IllegalArgumentException se o nome for nulo ou em branco
      */
-    public void setNome(String nome) {
+    public final void setNome(String nome) {
         if (nome == null || nome.isBlank()) {
             throw new IllegalArgumentException("O nome nao pode ser vazio.");
         }

@@ -77,7 +77,7 @@ public class TelaDetalhe {
 
     private void avaliar() {
         try {
-            double nota = Double.parseDouble(txtNota.getText());
+            double nota = Double.parseDouble(txtNota.getText().trim().replace(',', '.'));
             app.getUsuarioLogado().avaliar(midia, nota);
             app.getGerenciador().salvar(app.getUsuarioLogado());
             lblErro.setText("");

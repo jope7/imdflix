@@ -1,6 +1,9 @@
 package ui;
 
+import java.io.IOException;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -19,9 +22,15 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
-        var dados = CarregadorDados.padrao().carregar();
-        this.catalogo = dados.catalogo();
-        this.gerenciador = new GerenciadorUsuarios(dados.usuarioRepositorio());
+        try {
+            var dados = CarregadorDados.padrao().carregar();
+            this.catalogo = dados.catalogo();
+            this.gerenciador = new GerenciadorUsuarios(dados.usuarioRepositorio());
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, "Nao foi possivel carregar os dados:\n" + e.getMessage()).showAndWait();
+            Platform.exit();
+            return;
+        }
         stage.setTitle("IMDFlix");
         mostrarLogin();
         stage.show();

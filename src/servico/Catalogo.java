@@ -101,6 +101,11 @@ public class Catalogo {
      * restaurar os usuários (chamar de novo contaria as mesmas notas em dobro). Notas de títulos
      * que não existem mais no catálogo são ignoradas.
      *
+     * <p><b>Atenção:</b> o fluxo normal do sistema ({@link CarregadorDados} com o
+     * {@code UsuarioJsonRepositorio}) já aplica as notas nas mídias ao carregar. Não chame este método
+     * depois dele, ou as notas serão contadas em dobro. Ele serve só para quem restaura usuários sem
+     * tocar nas mídias (por exemplo, testes com repositórios em memória).
+     *
      * @param usuarios usuários restaurados
      */
     public void aplicarAvaliacoes(Collection<Usuario> usuarios) {

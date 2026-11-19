@@ -40,5 +40,789 @@
     "temporadas": 1,
     "episodiosPorTemporada": 13,
     "duracaoMediaEpisodio": 45
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "La Haine",
+    "genero": "Drama",
+    "ano": 1995,
+    "duracaoMinutos": 98,
+    "diretor": "Mathieu Kassovitz"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Cidade de Deus",
+    "genero": "Drama",
+    "ano": 2002,
+    "duracaoMinutos": 130,
+    "diretor": "Fernando Meirelles"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Parasita",
+    "genero": "Suspense",
+    "ano": 2019,
+    "duracaoMinutos": 132,
+    "diretor": "Bong Joon-ho"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Pulp Fiction",
+    "genero": "Crime",
+    "ano": 1994,
+    "duracaoMinutos": 154,
+    "diretor": "Quentin Tarantino"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "A Origem",
+    "genero": "Ficcao",
+    "ano": 2010,
+    "duracaoMinutos": 148,
+    "diretor": "Christopher Nolan"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Clube da Luta",
+    "genero": "Drama",
+    "ano": 1999,
+    "duracaoMinutos": 139,
+    "diretor": "David Fincher"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Taxi Driver",
+    "genero": "Drama",
+    "ano": 1976,
+    "duracaoMinutos": 114,
+    "diretor": "Martin Scorsese"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Whiplash",
+    "genero": "Drama",
+    "ano": 2014,
+    "duracaoMinutos": 106,
+    "diretor": "Damien Chazelle"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "O Poderoso Chefao",
+    "genero": "Crime",
+    "ano": 1972,
+    "duracaoMinutos": 175,
+    "diretor": "Francis Ford Coppola"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Batman: O Cavaleiro das Trevas",
+    "genero": "Acao",
+    "ano": 2008,
+    "duracaoMinutos": 152,
+    "diretor": "Christopher Nolan"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Blade Runner 2049",
+    "genero": "Ficcao",
+    "ano": 2017,
+    "duracaoMinutos": 164,
+    "diretor": "Denis Villeneuve"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Os Bons Companheiros",
+    "genero": "Crime",
+    "ano": 1990,
+    "duracaoMinutos": 146,
+    "diretor": "Martin Scorsese"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "A Viagem de Chihiro",
+    "genero": "Animacao",
+    "ano": 2001,
+    "duracaoMinutos": 125,
+    "diretor": "Hayao Miyazaki"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Oldboy",
+    "genero": "Suspense",
+    "ano": 2003,
+    "duracaoMinutos": 120,
+    "diretor": "Park Chan-wook"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "O Iluminado",
+    "genero": "Terror",
+    "ano": 1980,
+    "duracaoMinutos": 146,
+    "diretor": "Stanley Kubrick"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Mad Max: Estrada da Furia",
+    "genero": "Acao",
+    "ano": 2015,
+    "duracaoMinutos": 120,
+    "diretor": "George Miller"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Seven: Os Sete Crimes Capitais",
+    "genero": "Suspense",
+    "ano": 1995,
+    "duracaoMinutos": 127,
+    "diretor": "David Fincher"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Duna",
+    "genero": "Ficcao",
+    "ano": 2021,
+    "duracaoMinutos": 155,
+    "diretor": "Denis Villeneuve"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "O Lobo de Wall Street",
+    "genero": "Biografia",
+    "ano": 2013,
+    "duracaoMinutos": 180,
+    "diretor": "Martin Scorsese"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Akira",
+    "genero": "Animacao",
+    "ano": 1988,
+    "duracaoMinutos": 124,
+    "diretor": "Katsuhiro Otomo"
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Breaking Bad",
+    "genero": "Crime",
+    "ano": 2008,
+    "temporadas": 5,
+    "episodiosPorTemporada": 12,
+    "duracaoMediaEpisodio": 47
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Chernobyl",
+    "genero": "Drama",
+    "ano": 2019,
+    "temporadas": 1,
+    "episodiosPorTemporada": 5,
+    "duracaoMediaEpisodio": 65
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "True Detective",
+    "genero": "Suspense",
+    "ano": 2014,
+    "temporadas": 4,
+    "episodiosPorTemporada": 8,
+    "duracaoMediaEpisodio": 58
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Mr. Robot",
+    "genero": "Suspense",
+    "ano": 2015,
+    "temporadas": 4,
+    "episodiosPorTemporada": 11,
+    "duracaoMediaEpisodio": 49
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Severance",
+    "genero": "Ficcao",
+    "ano": 2022,
+    "temporadas": 2,
+    "episodiosPorTemporada": 9,
+    "duracaoMediaEpisodio": 48
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Black Mirror",
+    "genero": "Ficcao",
+    "ano": 2011,
+    "temporadas": 7,
+    "episodiosPorTemporada": 5,
+    "duracaoMediaEpisodio": 60
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "The Bear",
+    "genero": "Drama",
+    "ano": 2022,
+    "temporadas": 4,
+    "episodiosPorTemporada": 10,
+    "duracaoMediaEpisodio": 34
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Better Call Saul",
+    "genero": "Crime",
+    "ano": 2015,
+    "temporadas": 6,
+    "episodiosPorTemporada": 10,
+    "duracaoMediaEpisodio": 50
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "Senna",
+    "genero": "Esporte",
+    "ano": 2010,
+    "duracaoMinutos": 106,
+    "tema": "Automobilismo"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "O Dilema das Redes",
+    "genero": "Tecnologia",
+    "ano": 2020,
+    "duracaoMinutos": 94,
+    "tema": "Redes Sociais"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "13a Emenda",
+    "genero": "Historia",
+    "ano": 2016,
+    "duracaoMinutos": 100,
+    "tema": "Justica Racial"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "Professor Polvo",
+    "genero": "Natureza",
+    "ano": 2020,
+    "duracaoMinutos": 85,
+    "tema": "Vida Marinha"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "Icaro",
+    "genero": "Esporte",
+    "ano": 2017,
+    "duracaoMinutos": 121,
+    "tema": "Doping no Esporte"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "Amy",
+    "genero": "Musica",
+    "ano": 2015,
+    "duracaoMinutos": 128,
+    "tema": "Biografia Musical"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "O Sal da Terra",
+    "genero": "Biografia",
+    "ano": 2014,
+    "duracaoMinutos": 110,
+    "tema": "Fotografia"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "Hip-Hop Evolution",
+    "genero": "Musica",
+    "ano": 2016,
+    "duracaoMinutos": 180,
+    "tema": "Historia do Hip-Hop"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "O Senhor dos Aneis: A Sociedade do Anel",
+    "genero": "Fantasia",
+    "ano": 2001,
+    "duracaoMinutos": 178,
+    "diretor": "Peter Jackson"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Gladiador",
+    "genero": "Acao",
+    "ano": 2000,
+    "duracaoMinutos": 155,
+    "diretor": "Ridley Scott"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Bastardos Inglorios",
+    "genero": "Guerra",
+    "ano": 2009,
+    "duracaoMinutos": 153,
+    "diretor": "Quentin Tarantino"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Oppenheimer",
+    "genero": "Biografia",
+    "ano": 2023,
+    "duracaoMinutos": 180,
+    "diretor": "Christopher Nolan"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Alien, o Oitavo Passageiro",
+    "genero": "Ficcao",
+    "ano": 1979,
+    "duracaoMinutos": 117,
+    "diretor": "Ridley Scott"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "O Silencio dos Inocentes",
+    "genero": "Suspense",
+    "ano": 1991,
+    "duracaoMinutos": 118,
+    "diretor": "Jonathan Demme"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Central do Brasil",
+    "genero": "Drama",
+    "ano": 1998,
+    "duracaoMinutos": 110,
+    "diretor": "Walter Salles"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "O Fabuloso Destino de Amelie Poulain",
+    "genero": "Romance",
+    "ano": 2001,
+    "duracaoMinutos": 122,
+    "diretor": "Jean-Pierre Jeunet"
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "The Sopranos",
+    "genero": "Crime",
+    "ano": 1999,
+    "temporadas": 6,
+    "episodiosPorTemporada": 14,
+    "duracaoMediaEpisodio": 55
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "The Wire",
+    "genero": "Crime",
+    "ano": 2002,
+    "temporadas": 5,
+    "episodiosPorTemporada": 12,
+    "duracaoMediaEpisodio": 58
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Succession",
+    "genero": "Drama",
+    "ano": 2018,
+    "temporadas": 4,
+    "episodiosPorTemporada": 10,
+    "duracaoMediaEpisodio": 60
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Band of Brothers",
+    "genero": "Guerra",
+    "ano": 2001,
+    "temporadas": 1,
+    "episodiosPorTemporada": 10,
+    "duracaoMediaEpisodio": 62
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Mindhunter",
+    "genero": "Suspense",
+    "ano": 2017,
+    "temporadas": 2,
+    "episodiosPorTemporada": 10,
+    "duracaoMediaEpisodio": 54
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Arcane",
+    "genero": "Animacao",
+    "ano": 2021,
+    "temporadas": 2,
+    "episodiosPorTemporada": 9,
+    "duracaoMediaEpisodio": 41
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "O Ato de Matar",
+    "genero": "Historia",
+    "ano": 2012,
+    "duracaoMinutos": 117,
+    "tema": "Historia e Politica"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "Procurando Sugar Man",
+    "genero": "Musica",
+    "ano": 2012,
+    "duracaoMinutos": 86,
+    "tema": "Musica"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "Blackfish",
+    "genero": "Natureza",
+    "ano": 2013,
+    "duracaoMinutos": 83,
+    "tema": "Vida Marinha"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "Won't You Be My Neighbor?",
+    "genero": "Biografia",
+    "ano": 2018,
+    "duracaoMinutos": 94,
+    "tema": "Televisao e Cultura"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "Tiros em Columbine",
+    "genero": "Sociedade",
+    "ano": 2002,
+    "duracaoMinutos": 120,
+    "tema": "Controle de Armas"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "O Resgate do Soldado Ryan",
+    "genero": "Guerra",
+    "ano": 1998,
+    "duracaoMinutos": 169,
+    "diretor": "Steven Spielberg"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "A Lista de Schindler",
+    "genero": "Biografia",
+    "ano": 1993,
+    "duracaoMinutos": 195,
+    "diretor": "Steven Spielberg"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Forrest Gump: O Contador de Historias",
+    "genero": "Drama",
+    "ano": 1994,
+    "duracaoMinutos": 142,
+    "diretor": "Robert Zemeckis"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Um Sonho de Liberdade",
+    "genero": "Drama",
+    "ano": 1994,
+    "duracaoMinutos": 142,
+    "diretor": "Frank Darabont"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "O Rei Leao",
+    "genero": "Animacao",
+    "ano": 1994,
+    "duracaoMinutos": 88,
+    "diretor": "Roger Allers"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "De Volta para o Futuro",
+    "genero": "Ficcao",
+    "ano": 1985,
+    "duracaoMinutos": 116,
+    "diretor": "Robert Zemeckis"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "O Exterminador do Futuro 2: O Julgamento Final",
+    "genero": "Acao",
+    "ano": 1991,
+    "duracaoMinutos": 137,
+    "diretor": "James Cameron"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Os Infiltrados",
+    "genero": "Crime",
+    "ano": 2006,
+    "duracaoMinutos": 151,
+    "diretor": "Martin Scorsese"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Django Livre",
+    "genero": "Acao",
+    "ano": 2012,
+    "duracaoMinutos": 165,
+    "diretor": "Quentin Tarantino"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "O Grande Truque",
+    "genero": "Suspense",
+    "ano": 2006,
+    "duracaoMinutos": 130,
+    "diretor": "Christopher Nolan"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Amnesia",
+    "genero": "Suspense",
+    "ano": 2000,
+    "duracaoMinutos": 113,
+    "diretor": "Christopher Nolan"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Brilho Eterno de uma Mente sem Lembrancas",
+    "genero": "Romance",
+    "ano": 2004,
+    "duracaoMinutos": 108,
+    "diretor": "Michel Gondry"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Onde os Fracos Nao Tem Vez",
+    "genero": "Crime",
+    "ano": 2007,
+    "duracaoMinutos": 122,
+    "diretor": "Ethan Coen"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Sangue Negro",
+    "genero": "Drama",
+    "ano": 2007,
+    "duracaoMinutos": 158,
+    "diretor": "Paul Thomas Anderson"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Scarface",
+    "genero": "Crime",
+    "ano": 1983,
+    "duracaoMinutos": 170,
+    "diretor": "Brian De Palma"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Laranja Mecanica",
+    "genero": "Ficcao",
+    "ano": 1971,
+    "duracaoMinutos": 136,
+    "diretor": "Stanley Kubrick"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "2001: Uma Odisseia no Espaco",
+    "genero": "Ficcao",
+    "ano": 1968,
+    "duracaoMinutos": 149,
+    "diretor": "Stanley Kubrick"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "O Profissional",
+    "genero": "Acao",
+    "ano": 1994,
+    "duracaoMinutos": 110,
+    "diretor": "Luc Besson"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Coringa",
+    "genero": "Drama",
+    "ano": 2019,
+    "duracaoMinutos": 122,
+    "diretor": "Todd Phillips"
+  },
+  {
+    "tipo": "Filme",
+    "titulo": "Homem-Aranha no Aranhaverso",
+    "genero": "Animacao",
+    "ano": 2018,
+    "duracaoMinutos": 117,
+    "diretor": "Bob Persichetti"
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Game of Thrones",
+    "genero": "Fantasia",
+    "ano": 2011,
+    "temporadas": 8,
+    "episodiosPorTemporada": 9,
+    "duracaoMediaEpisodio": 57
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Stranger Things",
+    "genero": "Ficcao",
+    "ano": 2016,
+    "temporadas": 5,
+    "episodiosPorTemporada": 8,
+    "duracaoMediaEpisodio": 55
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "The Office",
+    "genero": "Comedia",
+    "ano": 2005,
+    "temporadas": 9,
+    "episodiosPorTemporada": 22,
+    "duracaoMediaEpisodio": 22
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Peaky Blinders",
+    "genero": "Crime",
+    "ano": 2013,
+    "temporadas": 6,
+    "episodiosPorTemporada": 6,
+    "duracaoMediaEpisodio": 58
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Fargo",
+    "genero": "Crime",
+    "ano": 2014,
+    "temporadas": 5,
+    "episodiosPorTemporada": 10,
+    "duracaoMediaEpisodio": 53
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "The Last of Us",
+    "genero": "Drama",
+    "ano": 2023,
+    "temporadas": 2,
+    "episodiosPorTemporada": 8,
+    "duracaoMediaEpisodio": 55
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Sherlock",
+    "genero": "Suspense",
+    "ano": 2010,
+    "temporadas": 4,
+    "episodiosPorTemporada": 3,
+    "duracaoMediaEpisodio": 88
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Narcos",
+    "genero": "Crime",
+    "ano": 2015,
+    "temporadas": 3,
+    "episodiosPorTemporada": 10,
+    "duracaoMediaEpisodio": 49
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Atlanta",
+    "genero": "Comedia",
+    "ano": 2016,
+    "temporadas": 4,
+    "episodiosPorTemporada": 10,
+    "duracaoMediaEpisodio": 30
+  },
+  {
+    "tipo": "Serie",
+    "titulo": "Attack on Titan",
+    "genero": "Animacao",
+    "ano": 2013,
+    "temporadas": 4,
+    "episodiosPorTemporada": 22,
+    "duracaoMediaEpisodio": 24
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "Fahrenheit 11 de Setembro",
+    "genero": "Politica",
+    "ano": 2004,
+    "duracaoMinutos": 122,
+    "tema": "Guerra ao Terror"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "Super Size Me: A Dieta do Palhaco",
+    "genero": "Saude",
+    "ano": 2004,
+    "duracaoMinutos": 100,
+    "tema": "Alimentacao"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "Inside Job: A Verdade da Crise",
+    "genero": "Economia",
+    "ano": 2010,
+    "duracaoMinutos": 109,
+    "tema": "Crise Financeira"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "Man on Wire: O Homem no Arame",
+    "genero": "Biografia",
+    "ano": 2008,
+    "duracaoMinutos": 94,
+    "tema": "Equilibrismo"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "Exit Through the Gift Shop",
+    "genero": "Arte",
+    "ano": 2010,
+    "duracaoMinutos": 87,
+    "tema": "Arte de Rua"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "Grizzly Man: O Homem Urso",
+    "genero": "Natureza",
+    "ano": 2005,
+    "duracaoMinutos": 103,
+    "tema": "Vida Selvagem"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "Jiro Dreams of Sushi",
+    "genero": "Biografia",
+    "ano": 2011,
+    "duracaoMinutos": 81,
+    "tema": "Gastronomia"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "Summer of Soul",
+    "genero": "Musica",
+    "ano": 2021,
+    "duracaoMinutos": 118,
+    "tema": "Festival Musical"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "American Factory",
+    "genero": "Sociedade",
+    "ano": 2019,
+    "duracaoMinutos": 110,
+    "tema": "Industria e Trabalho"
+  },
+  {
+    "tipo": "Documentario",
+    "titulo": "Crip Camp: Revolucao pela Inclusao",
+    "genero": "Historia",
+    "ano": 2020,
+    "duracaoMinutos": 106,
+    "tema": "Direitos Civis"
   }
 ]

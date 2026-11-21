@@ -19,34 +19,56 @@ import modelo.Midia;
 import modelo.Usuario;
 
 /**
- * guarda os usuários (lista e avaliações de cada um) em um arquivo JSON.
+ * Guarda os usuários (lista e avaliações de cada um) em um arquivo JSON.
  *
- * os usuários são lidos UMA ÚNICA VEZ, por carregar, e ficam
- * em memória. Ao carregar, cada avaliação é aplicada na mídia correspondente (é isso que recalcula as
- * médias). Por isso:
- *      o catálogo precisa estar totalmente carregado ANTES de chamar carregar
- *      listarTodos, buscarPorUsername e salvar nunca releem o arquivo
- *      títulos que não existem mais no catálogo são ignorados (somem do arquivo na próxima gravação)
- *      o arquivo é validado por inteiro antes de qualquer mídia ser alterada: se estiver inválido, a
- *      exceção é lançada e nenhuma média muda.</li>
+ * <p>Contrato importante: os usuários são lidos <b>uma única vez</b>, por
+ * {@link #carregar(Path, Function)}, e ficam em memória. Ao carregar, cada avaliação é aplicada na
+ * mídia correspondente (é isso que recalcula as médias). Por isso:
+ * <ul>
+ *   <li>o catálogo precisa estar totalmente carregado antes de chamar {@code carregar};</li>
+ *   <li>{@code listarTodos}, {@code buscarPorUsername} e {@code salvar} nunca releem o arquivo;</li>
+ *   <li>títulos que não existem mais no catálogo são ignorados (somem do arquivo na próxima gravação);</li>
+ *   <li>o arquivo é validado por inteiro antes de qualquer mídia ser alterada: se estiver inválido, a
+ *       exceção é lançada e nenhuma média muda.</li>
+ * </ul>
  */
 public class UsuarioJsonRepositorio implements UsuarioRepositorio {
     
+    /**
+     * Dados de um usuário já validados, ainda sem tocar em nenhuma mídia.
+     *
+     * @param username username já normalizado
+     * @param nome nome de exibição
+     * @param lista títulos de "Minha lista"
+     * @param notas notas dadas, por título
+     */
     private record Registro(String username, String nome, List<String> lista, Map<String, Double> notas) {
     }
 
+    /** Arquivo JSON dos usuários. */
     private final Path caminho;
+    /** Usuários em memória, indexados pelo username, na ordem do arquivo. */
     private final Map<String, Usuario> usuarios = new LinkedHashMap<>();
 
+    /**
+     * Uso interno: quem cria o repositório é {@link #carregar(Path, Function)}.
+     *
+     * @param caminho o arquivo JSON dos usuários
+     */
     private UsuarioJsonRepositorio(Path caminho) {
         this.caminho = caminho;
     }
 
-    /*
-        lê o arquivo e monta os usuarios
-        buscaMidia como achar uma mídia pelo título
-    */
-    
+    /**
+     * Lê o arquivo (ausente ou em branco dá lista vazia) e monta os usuários, aplicando as avaliações
+     * nas mídias do catálogo.
+     *
+     * @param caminho o arquivo JSON dos usuários
+     * @param buscaMidia como achar uma mídia pelo título, normalmente {@code catalogo::buscarPorTitulo}
+     * @return o repositório com os usuários carregados
+     * @throws IOException se o arquivo não puder ser lido
+     * @throws DadosInvalidosException se o arquivo estiver malformado ou com dados inválidos
+     */
     public static UsuarioJsonRepositorio carregar(Path caminho, Function<String, Optional<Midia>> buscaMidia) throws IOException {
         Objects.requireNonNull(caminho, "O caminho do arquivo nao pode ser nulo.");
         Objects.requireNonNull(buscaMidia, "A busca de midias nao pode ser nula.");
@@ -55,6 +77,11 @@ public class UsuarioJsonRepositorio implements UsuarioRepositorio {
         return repositorio;
     }
 
+    /**
+     * Informa o arquivo usado.
+     *
+     * @return o caminho do arquivo JSON
+     */
     public Path getCaminho() {
         return caminho;
     }
@@ -88,6 +115,13 @@ public class UsuarioJsonRepositorio implements UsuarioRepositorio {
 
     // ----- leitura
 
+    /**
+     * Lê o arquivo em duas fases: primeiro valida todos os registros sem alterar nenhuma mídia e só
+     * depois monta os usuários e aplica as notas. Títulos que não existem no catálogo são ignorados.
+     *
+     * @param buscaMidia como achar uma mídia pelo título
+     * @throws IOException se o arquivo não puder ser lido ou tiver dados inválidos
+     */
     private void lerArquivo(Function<String, Optional<Midia>> buscaMidia) throws IOException {
         String nome = caminho.getFileName().toString();
         JsonArray itens = ArquivoJson.lerLista(caminho);
@@ -138,6 +172,13 @@ public class UsuarioJsonRepositorio implements UsuarioRepositorio {
         }
     }
 
+    /**
+     * Valida e lê os dados de um usuário. {@code minhaLista} e {@code avaliacoes} são opcionais.
+     *
+     * @param o o objeto JSON de um usuário
+     * @return os dados do usuário, já validados
+     * @throws DadosInvalidosException se algum campo faltar, tiver o tipo errado ou uma nota estiver fora de 0 a 10
+     */
     private static Registro lerRegistro(JsonObject o) throws DadosInvalidosException {
         String username;
         
@@ -204,6 +245,11 @@ public class UsuarioJsonRepositorio implements UsuarioRepositorio {
 
     // ----- gravacao
 
+    /**
+     * Grava no arquivo todos os usuários que estão em memória.
+     *
+     * @throws IOException se não for possível gravar
+     */
     private void gravar() throws IOException {
         JsonArray array = new JsonArray();
         

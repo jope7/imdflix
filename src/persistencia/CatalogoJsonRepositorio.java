@@ -24,24 +24,40 @@ import modelo.Filme;
 import modelo.Midia;
 import modelo.Serie;
 
-/*
-    guarda o catalogo em um arquivo json
-
-    arquivo ausente ou em branco: catalogo vazio (o arquivo é criado ao salvar)
-    arquivo malformatado ou com dados inválidos: DadosInvalidosException
-    as notas não são gravadas aqui, ficam nos usuários e as medias são recalculadas ao carregar
-    ao salvar, se o arquivo atual estiver invalido, nada é sobrescrito (exceção é lançada)
-*/
+/**
+ * Guarda o catálogo em um arquivo JSON (uma lista de títulos).
+ *
+ * <p>Regras:
+ * <ul>
+ *   <li>arquivo ausente ou em branco: catálogo vazio (o arquivo é criado ao salvar);</li>
+ *   <li>arquivo malformado ou com dados inválidos: {@link DadosInvalidosException};</li>
+ *   <li>as notas não são gravadas aqui: ficam nos usuários e as médias são recalculadas ao carregar;</li>
+ *   <li>ao salvar, se o arquivo atual estiver inválido, nada é sobrescrito (a exceção é lançada).</li>
+ * </ul>
+ */
 public class CatalogoJsonRepositorio implements CatalogoRepositorio {
 
+    /** Gson configurado para gravar com indentação e sem escapar caracteres como aspas simples. */
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
+    /** Arquivo JSON do catálogo. */
     private final Path caminho;
 
+    /**
+     * Cria o repositório para o arquivo informado. O arquivo só é lido quando for preciso.
+     *
+     * @param caminho o arquivo JSON do catálogo
+     * @throws NullPointerException se o caminho for nulo
+     */
     public CatalogoJsonRepositorio(Path caminho) {
         this.caminho = Objects.requireNonNull(caminho, "O caminho do arquivo nao pode ser nulo.");
     }
 
+    /**
+     * Informa o arquivo usado.
+     *
+     * @return o caminho do arquivo JSON
+     */
     public Path getCaminho() {
         return caminho;
     }
@@ -150,6 +166,12 @@ public class CatalogoJsonRepositorio implements CatalogoRepositorio {
         gravar(atuais);
     }
 
+    /**
+     * Grava todas as mídias no arquivo, criando a pasta se for preciso.
+     *
+     * @param midias as mídias a gravar
+     * @throws IOException se não for possível gravar
+     */
     private void gravar(List<Midia> midias) throws IOException {
         JsonArray array = new JsonArray();
         
@@ -166,6 +188,13 @@ public class CatalogoJsonRepositorio implements CatalogoRepositorio {
         Files.writeString(caminho, GSON.toJson(array) + System.lineSeparator(), StandardCharsets.UTF_8);
     }
 
+    /**
+     * Converte uma mídia em objeto JSON, com o campo {@code tipo} e os campos da sua subclasse.
+     *
+     * @param midia a mídia a converter
+     * @return o objeto JSON da mídia
+     * @throws DadosInvalidosException se a mídia for de um tipo que não sabemos gravar
+     */
     private static JsonObject paraJson(Midia midia) throws DadosInvalidosException {
         JsonObject o = new JsonObject();
         
@@ -191,12 +220,24 @@ public class CatalogoJsonRepositorio implements CatalogoRepositorio {
         return o;
     }
 
+    /**
+     * Grava no objeto JSON os campos que todas as mídias têm.
+     *
+     * @param o o objeto JSON de destino
+     * @param midia a mídia de onde vêm os dados
+     */
     private static void comuns(JsonObject o, Midia midia) {
         o.addProperty("titulo", midia.getTitulo());
         o.addProperty("genero", midia.getGenero());
         o.addProperty("ano", midia.getAnoLancamento());
     }
 
+    /**
+     * Normaliza um título para comparação: sem espaços nas pontas e em minúsculas.
+     *
+     * @param titulo o título original
+     * @return a chave usada para comparar títulos
+     */
     private static String chave(String titulo) {
         return titulo.trim().toLowerCase();
     }

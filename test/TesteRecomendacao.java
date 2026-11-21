@@ -31,7 +31,7 @@ public class TesteRecomendacao {
         testaListaDevolvidaEhSomenteLeitura();
         testaPolimorfismo();
         testaRecomendadorTrocaDeEstrategia();
-        System.out.println("TesteRecomendacao: todos os testes passaram.");
+        System.out.println("✅ TesteRecomendacao - todos os testes passaram.");
     }
 
     // ---------- auxiliares ----------

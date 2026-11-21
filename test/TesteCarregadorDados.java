@@ -209,10 +209,10 @@ public class TesteCarregadorDados {
         
         DadosCarregados dados = padrao.carregar();
         
-        assert dados.catalogo().listarTodos().size() == 5 : "O catalogo de exemplo deveria ter 5 titulos";
-        assert dados.usuarioRepositorio().listarTodos().size() == 3 : "Deveria haver 3 usuarios de exemplo";
-        assert midia(dados, "Matrix").getNotaMedia() == 8.0 && midia(dados, "Matrix").getQuantidadeAvaliacoes() == 2;
-        assert midia(dados, "Dark").getNotaMedia() == 8.5;
-        assert midia(dados, "Free Solo").getNotaMedia() == 10.0;
+        assert dados.catalogo().listarTodos().size() == 100 : "O catalogo de exemplo deveria ter 100 titulos";
+        assert dados.usuarioRepositorio().listarTodos().size() == 25 : "Deveria haver 25 usuarios de exemplo";
+        assert midia(dados, "Matrix").getNotaMedia() == 8.8 && midia(dados, "Matrix").getQuantidadeAvaliacoes() == 5;
+        assert midia(dados, "Dark").getNotaMedia() == 9.0;
+        assert Math.abs(midia(dados, "Free Solo").getNotaMedia() - (27.5 / 3.0)) < 0.001;
     }
 }

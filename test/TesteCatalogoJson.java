@@ -263,7 +263,7 @@ public class TesteCatalogoJson {
         
         List<Midia> lidas = new CatalogoJsonRepositorio(exemplo).listarTodos();
         
-        assert lidas.size() == 5 : "O catalogo de exemplo deveria ter 5 titulos, tem " + lidas.size();
+        assert lidas.size() == 100 : "O catalogo de exemplo deveria ter 100 titulos, tem " + lidas.size();
         
         Midia dark = lidas.stream().filter(m -> m.getTitulo().equals("Dark")).findFirst().orElseThrow();
         

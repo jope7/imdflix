@@ -369,11 +369,14 @@ public class TesteUsuarioJson {
         
         UsuarioJsonRepositorio repo = carregar(usuariosExemplo, c);
         
-        assert repo.listarTodos().size() == 3 : "O arquivo de exemplo deveria ter 3 usuarios";
-        assert midia(c, "Matrix").getQuantidadeAvaliacoes() == 2 && midia(c, "Matrix").getNotaMedia() == 8.0
-            : "Matrix: notas 9.0 e 7.0, media 8.0";
-        assert midia(c, "Dark").getNotaMedia() == 8.5;
-        assert midia(c, "Free Solo").getNotaMedia() == 10.0;
+        assert repo.listarTodos().size() == 25 : "O arquivo de exemplo deveria ter 25 usuarios";
+        assert midia(c, "Matrix").getQuantidadeAvaliacoes() == 5 && midia(c, "Matrix").getNotaMedia() == 8.8
+            : "Matrix: 5 notas (9.0, 7.0, 9.5, 9.0, 9.5), media 8.8";
+        assert midia(c, "Dark").getQuantidadeAvaliacoes() == 2 && midia(c, "Dark").getNotaMedia() == 9.0
+            : "Dark: 2 notas (8.5, 9.5), media 9.0";
+        assert midia(c, "Free Solo").getQuantidadeAvaliacoes() == 3 
+            && Math.abs(midia(c, "Free Solo").getNotaMedia() - (27.5 / 3.0)) < 0.001
+            : "Free Solo: 3 notas (10.0, 9.0, 8.5), media ~9.17";
         assert repo.buscarPorUsername("vitinhozip").orElseThrow().getMinhaLista().equals(List.of("Free Solo"));
     }
 }

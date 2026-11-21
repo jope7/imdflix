@@ -20,6 +20,10 @@ public class RecomendacaoPorGenero implements RecomendacaoStrategy {
     /** Média mínima das notas do usuário em um gênero para considerá-lo um gênero de que ele gosta. */
     public static final double NOTA_MINIMA_GOSTO = 7.0;
 
+    /** Cria a estratégia, que não guarda nenhum estado. */
+    public RecomendacaoPorGenero() {
+    }
+
     @Override
     public String getNome() {
         return "Pelo seu gosto";
@@ -50,7 +54,13 @@ public class RecomendacaoPorGenero implements RecomendacaoStrategy {
         return RecomendacaoStrategy.limitar(candidatas, limite);
     }
 
-    /** Média das notas do usuário em cada gênero, mantendo só os gêneros de que ele gosta. */
+    /**
+     * Calcula a média das notas do usuário em cada gênero, mantendo só os gêneros de que ele gosta.
+     *
+     * @param usuario o usuário, de quem vêm as notas
+     * @param catalogo os títulos, que informam o gênero de cada nota
+     * @return a média das notas, por gênero (em minúsculas), só para médias de pelo menos {@link #NOTA_MINIMA_GOSTO}
+     */
     private static Map<String, Double> afinidadePorGenero(Usuario usuario, List<Midia> catalogo) {
         Map<String, double[]> acumulado = new LinkedHashMap<>(); // gênero -> {soma, quantidade}
         for (Midia midia : catalogo) {
@@ -71,6 +81,12 @@ public class RecomendacaoPorGenero implements RecomendacaoStrategy {
         return afinidade;
     }
 
+    /**
+     * Normaliza o gênero para comparação: sem espaços nas pontas e em minúsculas.
+     *
+     * @param genero o gênero original
+     * @return a chave usada para agrupar gêneros
+     */
     private static String chave(String genero) {
         return genero.trim().toLowerCase();
     }

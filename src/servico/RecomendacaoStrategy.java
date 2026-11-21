@@ -18,13 +18,23 @@ import modelo.Usuario;
  */
 public interface RecomendacaoStrategy {
 
-    /** Nome curto, para mostrar ao usuário. */
+    /**
+     * Dá o nome do critério, para mostrar ao usuário.
+     *
+     * @return um nome curto (por exemplo, "Mais bem avaliados")
+     */
     String getNome();
 
-    /** Explica em uma frase como a recomendação é calculada. */
+    /**
+     * Explica como a recomendação é calculada.
+     *
+     * @return uma frase descrevendo o critério
+     */
     String getDescricao();
 
     /**
+     * Calcula as recomendações para o usuário.
+     *
      * @param usuario usuário que receberá as recomendações
      * @param catalogo títulos disponíveis
      * @param limite quantidade máxima de títulos (deve ser positiva)
@@ -33,7 +43,13 @@ public interface RecomendacaoStrategy {
      */
     List<Midia> recomendar(Usuario usuario, List<Midia> catalogo, int limite);
 
-    /** Títulos que o usuário ainda não avaliou nem colocou na lista. */
+    /**
+     * Separa os títulos que o usuário ainda não avaliou nem colocou na lista.
+     *
+     * @param usuario o usuário
+     * @param catalogo todos os títulos disponíveis
+     * @return os títulos ainda não vistos pelo usuário (lista nova, que pode ser alterada)
+     */
     static List<Midia> naoVistas(Usuario usuario, List<Midia> catalogo) {
         List<Midia> resultado = new ArrayList<>();
         for (Midia midia : catalogo) {
@@ -45,13 +61,25 @@ public interface RecomendacaoStrategy {
         return resultado;
     }
 
+    /**
+     * Garante que o limite pedido é positivo.
+     *
+     * @param limite a quantidade máxima de títulos pedida
+     * @throws IllegalArgumentException se o limite for zero ou negativo
+     */
     static void validarLimite(int limite) {
         if (limite <= 0) {
             throw new IllegalArgumentException("O limite deve ser positivo.");
         }
     }
 
-    /** Primeiros {@code limite} itens, em uma lista somente leitura. */
+    /**
+     * Corta a lista nos primeiros {@code limite} itens.
+     *
+     * @param ordenadas títulos já ordenados do mais para o menos recomendado
+     * @param limite quantidade máxima de itens
+     * @return os primeiros itens, em uma lista somente leitura
+     */
     static List<Midia> limitar(List<Midia> ordenadas, int limite) {
         return List.copyOf(ordenadas.subList(0, Math.min(limite, ordenadas.size())));
     }

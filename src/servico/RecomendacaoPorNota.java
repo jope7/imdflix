@@ -13,6 +13,10 @@ import modelo.Usuario;
  */
 public class RecomendacaoPorNota implements RecomendacaoStrategy {
 
+    /** Cria a estratégia, que não guarda nenhum estado. */
+    public RecomendacaoPorNota() {
+    }
+
     @Override
     public String getNome() {
         return "Mais bem avaliados";

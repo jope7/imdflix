@@ -20,7 +20,9 @@ import persistencia.UsuarioRepositorio;
  * avaliações) são persistidas com {@link #salvar(Usuario)}.
  */
 public class GerenciadorUsuarios {
+    /** Onde os usuários são lidos e gravados. */
     private final UsuarioRepositorio repositorio;
+    /** Usuários em memória, indexados pelo username, na ordem de cadastro. */
     private final Map<String, Usuario> usuarios = new LinkedHashMap<>();
 
     /**
@@ -84,7 +86,11 @@ public class GerenciadorUsuarios {
         return Optional.ofNullable(usuarios.get(Usuario.normalizarUsername(username)));
     }
 
-    /** @return todos os usuários, na ordem de cadastro (lista somente leitura) */
+    /**
+     * Lista todos os usuários cadastrados.
+     *
+     * @return todos os usuários, na ordem de cadastro (lista somente leitura)
+     */
     public List<Usuario> listarTodos() {
         return Collections.unmodifiableList(new ArrayList<>(usuarios.values()));
     }

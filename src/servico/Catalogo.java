@@ -24,7 +24,9 @@ import persistencia.CatalogoRepositorio;
  * as notas das mídias sejam compartilhadas por todos os usuários.
  */
 public class Catalogo {
+    /** Onde os títulos são lidos e gravados. */
     private final CatalogoRepositorio repositorio;
+    /** Títulos em memória, indexados pelo título em minúsculas e na ordem de cadastro. */
     private final Map<String, Midia> midias = new LinkedHashMap<>();
 
     /**
@@ -40,6 +42,12 @@ public class Catalogo {
         }
     }
 
+    /**
+     * Normaliza um título para comparação: sem espaços nas pontas e em minúsculas.
+     *
+     * @param titulo o título original
+     * @return a chave usada para indexar e comparar títulos
+     */
     private static String chave(String titulo) {
         return titulo.trim().toLowerCase();
     }
@@ -90,7 +98,11 @@ public class Catalogo {
         return resultado;
     }
 
-    /** @return todas as mídias, na ordem de cadastro (lista somente leitura) */
+    /**
+     * Lista todos os títulos do catálogo.
+     *
+     * @return todas as mídias, na ordem de cadastro (lista somente leitura)
+     */
     public List<Midia> listarTodos() {
         return Collections.unmodifiableList(new ArrayList<>(midias.values()));
     }

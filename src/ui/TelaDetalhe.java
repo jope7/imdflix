@@ -11,17 +11,38 @@ import modelo.Exibivel;
 import modelo.Midia;
 import java.io.IOException;
 
+/**
+ * Tela de detalhe de um título: mostra os dados, o resumo de exibição, a nota média e a nota do
+ * usuário, e permite avaliar o título (nota de 0 a 10, aceitando vírgula) e adicioná-lo à lista.
+ *
+ * Depois de cada mudança, o usuário é salvo pelo {@code GerenciadorUsuarios}.
+ */
 public class TelaDetalhe {
+    /** Controlador de telas. */
     private final App app;
+    /** Título mostrado. */
     private final Midia midia;
+    /** Painel raiz da tela. */
     private final VBox raiz;
+    /** Texto da nota média. */
     private final Label lblMedia = new Label();
+    /** Texto da nota dada pelo usuário. */
     private final Label lblMinhaNota = new Label();
+    /** Campo onde o usuário digita a nota. */
     private final TextField txtNota = new TextField();
+    /** Botão de adicionar à lista; fica desativado se o título já estiver na lista. */
     private final Button btnAdicionar = new Button("Adicionar à minha lista");
+    /** Mensagem de erro. */
     private final Label lblErro = new Label();
+    /** Mensagem de sucesso. */
     private final Label lblSucesso = new Label();
 
+    /**
+     * Monta a tela.
+     *
+     * @param app o controlador de telas
+     * @param midia o título a mostrar
+     */
     public TelaDetalhe(App app, Midia midia) {
         this.app = app;
         this.midia = midia;
@@ -62,7 +83,7 @@ public class TelaDetalhe {
         raiz.setPadding(new Insets(20));
     }
 
-    // atualiza os textos da nota média e da nota do usuário
+    /** Atualiza os textos da nota média e da nota do usuário. */
     private void atualizarNotas() {
         lblMedia.setText(String.format("Nota média: %.1f (%d avaliação(ões))",
                 midia.getNotaMedia(), midia.getQuantidadeAvaliacoes()));
@@ -75,9 +96,13 @@ public class TelaDetalhe {
         }
     }
 
+    /**
+     * Registra a nota digitada e salva o usuário. Mostra o erro se a nota não for um número, se estiver
+     * fora de 0 a 10 ou se não for possível salvar.
+     */
     private void avaliar() {
         try {
-            double nota = Double.parseDouble(txtNota.getText());
+            double nota = Double.parseDouble(txtNota.getText().trim().replace(',', '.'));
             app.getUsuarioLogado().avaliar(midia, nota);
             app.getGerenciador().salvar(app.getUsuarioLogado());
             lblErro.setText("");
@@ -95,6 +120,7 @@ public class TelaDetalhe {
         }
     }
 
+    /** Adiciona o título à lista do usuário e salva. Mostra o erro se não for possível salvar. */
     private void adicionarNaLista() {
         try {
             lblErro.setText("");
@@ -109,6 +135,11 @@ public class TelaDetalhe {
         }
     }
 
+    /**
+     * Informa o painel da tela.
+     *
+     * @return o painel raiz
+     */
     public VBox getRaiz() {
         return raiz;
     }

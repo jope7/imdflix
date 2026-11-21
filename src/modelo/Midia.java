@@ -7,13 +7,20 @@ import excecoes.NotaInvalidaException;
  * Guarda os dados comuns e acumula as notas recebidas para calcular a média.
  */
 public abstract class Midia implements Avaliavel {
+    /** Título da mídia (identificador no catálogo). */
     private String titulo;
+    /** Gênero da mídia. */
     private String genero;
+    /** Ano de lançamento. */
     private int anoLancamento;
+    /** Soma de todas as notas recebidas, usada para calcular a média. */
     private double somaNotas;
+    /** Quantidade de notas recebidas. */
     private int quantidadeNotas;
 
     /**
+     * Cria uma mídia com os dados comuns a todos os tipos. Só as subclasses chamam este construtor.
+     *
      * @param titulo título (não pode ser vazio)
      * @param genero gênero (não pode ser vazio)
      * @param anoLancamento ano de lançamento (a partir de 1888)
@@ -38,7 +45,11 @@ public abstract class Midia implements Avaliavel {
 
     }
 
-    /** @return o tipo da mídia (ex.: "Filme", "Serie", "Documentario") */
+    /**
+     * Informa o tipo da mídia. Cada subclasse devolve o seu (polimorfismo).
+     *
+     * @return o tipo da mídia (ex.: "Filme", "Serie", "Documentario")
+     */
     public abstract String getTipo();
 
     /**
@@ -100,17 +111,29 @@ public abstract class Midia implements Avaliavel {
         return quantidadeNotas;
     }
 
-    /** @return o título */
+    /**
+     * Informa o título, que identifica a mídia no catálogo.
+     *
+     * @return o título
+     */
     public String getTitulo() {
         return titulo;
     }
 
-    /** @return o gênero */
+    /**
+     * Informa o gênero (por exemplo, Ficção ou Suspense).
+     *
+     * @return o gênero
+     */
     public String getGenero() {
         return genero;
     }
 
-    /** @return o ano de lançamento */
+    /**
+     * Informa o ano em que a mídia foi lançada.
+     *
+     * @return o ano de lançamento
+     */
     public int getAnoLancamento() {
         return anoLancamento;
     }

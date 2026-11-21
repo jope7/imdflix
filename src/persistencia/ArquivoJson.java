@@ -14,17 +14,25 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-/*
-    leitura e gravação dos arquivos JSON
-*/
+/**
+ * Leitura e gravação de arquivos JSON que têm uma lista na raiz. Uso interno do pacote.
+ */
 final class ArquivoJson {
 
+    /** Gson configurado para gravar com indentação e sem escapar caracteres como aspas simples. */
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create();
 
+    /** Classe utilitária: não deve ser instanciada. */
     private ArquivoJson(){}
 
-    // lê  a lista de raiz do arquivo. 
-    // arquivo ausente ou em branco dá lista vazia.
+    /**
+     * Lê a lista da raiz do arquivo. Arquivo ausente ou em branco dá lista vazia.
+     *
+     * @param caminho o arquivo JSON
+     * @return os itens da lista
+     * @throws IOException se o arquivo não puder ser lido
+     * @throws DadosInvalidosException se o arquivo não estiver em UTF-8, estiver malformado ou não tiver uma lista na raiz
+     */
     static JsonArray lerLista(Path caminho) throws IOException {
         if (!Files.exists(caminho)) {
             return new JsonArray();
@@ -62,7 +70,13 @@ final class ArquivoJson {
         return raiz.getAsJsonArray();
     }
 
-    //  grava a lista
+    /**
+     * Grava a lista no arquivo, criando a pasta se for preciso.
+     *
+     * @param caminho o arquivo JSON
+     * @param lista os itens a gravar
+     * @throws IOException se não for possível gravar
+     */
     static void gravarLista(Path caminho, JsonArray lista) throws IOException {
         Path pasta = caminho.toAbsolutePath().getParent();
         if (pasta != null) {
@@ -71,7 +85,14 @@ final class ArquivoJson {
         Files.writeString(caminho, GSON.toJson(lista) + System.lineSeparator(), StandardCharsets.UTF_8);
     }
 
-    // le um campo de texto obrigatorio
+    /**
+     * Lê um campo de texto obrigatório.
+     *
+     * @param objeto o objeto JSON
+     * @param campo o nome do campo
+     * @return o texto do campo
+     * @throws DadosInvalidosException se o campo faltar ou não for um texto
+     */
     static String texto(JsonObject objeto, String campo) throws DadosInvalidosException {
         JsonElement e = objeto.get(campo);
         if (e == null || e.isJsonNull()) {

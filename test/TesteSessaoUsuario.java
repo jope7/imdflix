@@ -7,6 +7,7 @@ public class TesteSessaoUsuario {
 
     public static void main(String[] args) {
         testaInstanciaUnica();
+        testaConstrutorPrivado();
         testaEntrarESair();
         testaEntrarSubstituiUsuario();
         testaEntrarComNulo();
@@ -16,6 +17,13 @@ public class TesteSessaoUsuario {
 
     static void testaInstanciaUnica() {
         assert SessaoUsuario.getInstancia() == SessaoUsuario.getInstancia() : "O Singleton deveria devolver sempre a mesma instancia";
+    }
+
+    static void testaConstrutorPrivado() {
+        for (java.lang.reflect.Constructor<?> c : SessaoUsuario.class.getDeclaredConstructors()) {
+            assert java.lang.reflect.Modifier.isPrivate(c.getModifiers())
+                : "O construtor da SessaoUsuario deveria ser privado, senao qualquer um cria outra instancia";
+        }
     }
 
     static void testaEntrarESair() {

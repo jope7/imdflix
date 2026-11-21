@@ -2,8 +2,14 @@
   {
     "username": "76ope",
     "nome": "Jope",
-    "minhaLista": ["Matrix", "Dark"],
-    "avaliacoes": { "Matrix": 9.0, "Dark": 8.5 }
+    "minhaLista": [
+      "Matrix",
+      "Dark"
+    ],
+    "avaliacoes": {
+      "Matrix": 9.0,
+      "Dark": 8.5
+    }
   },
   {
     "username": "trembo_dev",
@@ -14,7 +20,18 @@
   {
     "username": "vitinhozip",
     "nome": "Vitor Gabriel",
-    "minhaLista": ["Free Solo"],
-    "avaliacoes": { "Free Solo": 10.0, "Matrix": 7.0 }
+    "minhaLista": [
+      "Free Solo"
+    ],
+    "avaliacoes": {
+      "Free Solo": 10.0,
+      "Matrix": 7.0
+    }
+  },
+  {
+    "username": "sixseven",
+    "nome": "Farmadorzin de Aura",
+    "minhaLista": [],
+    "avaliacoes": {}
   }
 ]

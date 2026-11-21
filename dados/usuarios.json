@@ -4,11 +4,17 @@
     "nome": "Jope",
     "minhaLista": [
       "Matrix",
-      "Dark"
+      "Dark",
+      "La Haine",
+      "The Sopranos",
+      "Whiplash"
     ],
     "avaliacoes": {
       "Matrix": 9.0,
-      "Dark": 8.5
+      "Dark": 8.5,
+      "La Haine": 10.0,
+      "The Sopranos": 9.0,
+      "Whiplash": 9.5
     }
   },
   {
@@ -33,5 +39,431 @@
     "nome": "Farmadorzin de Aura",
     "minhaLista": [],
     "avaliacoes": {}
+  },
+  {
+    "username": "camila_cine",
+    "nome": "Camila Nogueira",
+    "minhaLista": [
+      "Parasita",
+      "Central do Brasil",
+      "O Fabuloso Destino de Amelie Poulain",
+      "Brilho Eterno de uma Mente sem Lembrancas",
+      "Succession",
+      "O Sal da Terra"
+    ],
+    "avaliacoes": {
+      "Parasita": 9.5,
+      "Central do Brasil": 10.0,
+      "O Fabuloso Destino de Amelie Poulain": 9.0,
+      "Brilho Eterno de uma Mente sem Lembrancas": 9.5,
+      "La Haine": 9.0,
+      "O Sal da Terra": 9.5
+    }
+  },
+  {
+    "username": "rafa_scifi",
+    "nome": "Rafael Medeiros",
+    "minhaLista": [
+      "Blade Runner 2049",
+      "Duna",
+      "2001: Uma Odisseia no Espaco",
+      "Severance",
+      "Black Mirror",
+      "Cosmos"
+    ],
+    "avaliacoes": {
+      "Matrix": 9.5,
+      "Interestelar": 9.0,
+      "Blade Runner 2049": 10.0,
+      "Duna": 9.0,
+      "2001: Uma Odisseia no Espaco": 9.5,
+      "Alien, o Oitavo Passageiro": 8.5,
+      "Severance": 9.5,
+      "Black Mirror": 8.0,
+      "Cosmos": 10.0
+    }
+  },
+  {
+    "username": "beat_kassovitz",
+    "nome": "Lucas Andrade",
+    "minhaLista": [
+      "La Haine",
+      "Cidade de Deus",
+      "Hip-Hop Evolution",
+      "Atlanta",
+      "Summer of Soul",
+      "Amy"
+    ],
+    "avaliacoes": {
+      "La Haine": 10.0,
+      "Cidade de Deus": 10.0,
+      "Hip-Hop Evolution": 9.5,
+      "Atlanta": 9.5,
+      "Summer of Soul": 9.0,
+      "Amy": 8.5,
+      "Whiplash": 9.0,
+      "Procurando Sugar Man": 8.5
+    }
+  },
+  {
+    "username": "mari_criminal",
+    "nome": "Mariana Costa",
+    "minhaLista": [
+      "Breaking Bad",
+      "Better Call Saul",
+      "Mindhunter",
+      "True Detective",
+      "Seven: Os Sete Crimes Capitais",
+      "O Silencio dos Inocentes"
+    ],
+    "avaliacoes": {
+      "Breaking Bad": 10.0,
+      "Better Call Saul": 9.5,
+      "Mindhunter": 9.0,
+      "True Detective": 9.0,
+      "Seven: Os Sete Crimes Capitais": 9.5,
+      "O Silencio dos Inocentes": 9.0,
+      "Fargo": 8.5,
+      "Os Infiltrados": 8.5
+    }
+  },
+  {
+    "username": "pedro_nolan",
+    "nome": "Pedro Henrique",
+    "minhaLista": [
+      "A Origem",
+      "Oppenheimer",
+      "Batman: O Cavaleiro das Trevas",
+      "O Grande Truque",
+      "Amnesia",
+      "Chernobyl"
+    ],
+    "avaliacoes": {
+      "A Origem": 9.5,
+      "Interestelar": 9.5,
+      "Oppenheimer": 9.0,
+      "Batman: O Cavaleiro das Trevas": 10.0,
+      "O Grande Truque": 9.0,
+      "Amnesia": 8.5,
+      "Chernobyl": 9.5
+    }
+  },
+  {
+    "username": "julia_otaku",
+    "nome": "Julia Fernandes",
+    "minhaLista": [
+      "A Viagem de Chihiro",
+      "Akira",
+      "Arcane",
+      "Attack on Titan",
+      "Homem-Aranha no Aranhaverso"
+    ],
+    "avaliacoes": {
+      "A Viagem de Chihiro": 10.0,
+      "Akira": 9.0,
+      "Arcane": 9.5,
+      "Attack on Titan": 9.5,
+      "Homem-Aranha no Aranhaverso": 9.5,
+      "O Rei Leao": 8.5
+    }
+  },
+  {
+    "username": "diego_mafia",
+    "nome": "Diego Vasconcelos",
+    "minhaLista": [
+      "O Poderoso Chefao",
+      "Os Bons Companheiros",
+      "Scarface",
+      "The Sopranos",
+      "The Wire",
+      "Peaky Blinders"
+    ],
+    "avaliacoes": {
+      "O Poderoso Chefao": 10.0,
+      "Os Bons Companheiros": 9.5,
+      "Scarface": 8.5,
+      "The Sopranos": 10.0,
+      "The Wire": 9.5,
+      "Peaky Blinders": 8.5,
+      "Taxi Driver": 9.0,
+      "Narcos": 8.0
+    }
+  },
+  {
+    "username": "fernanda_docs",
+    "nome": "Fernanda Lima",
+    "minhaLista": [
+      "13a Emenda",
+      "O Dilema das Redes",
+      "Inside Job: A Verdade da Crise",
+      "American Factory",
+      "Crip Camp: Revolucao pela Inclusao",
+      "O Ato de Matar"
+    ],
+    "avaliacoes": {
+      "13a Emenda": 9.5,
+      "O Dilema das Redes": 8.5,
+      "Inside Job: A Verdade da Crise": 9.0,
+      "American Factory": 8.5,
+      "Crip Camp: Revolucao pela Inclusao": 9.0,
+      "O Ato de Matar": 9.5,
+      "Tiros em Columbine": 8.5,
+      "Fahrenheit 11 de Setembro": 8.0
+    }
+  },
+  {
+    "username": "thiago_speed",
+    "nome": "Thiago Albuquerque",
+    "minhaLista": [
+      "Senna",
+      "Icaro",
+      "Mad Max: Estrada da Furia",
+      "Gladiador",
+      "O Exterminador do Futuro 2: O Julgamento Final"
+    ],
+    "avaliacoes": {
+      "Senna": 10.0,
+      "Icaro": 9.0,
+      "Free Solo": 9.0,
+      "Mad Max: Estrada da Furia": 9.0,
+      "Gladiador": 8.5,
+      "O Exterminador do Futuro 2: O Julgamento Final": 9.0,
+      "Man on Wire: O Homem no Arame": 8.5
+    }
+  },
+  {
+    "username": "larissa_nature",
+    "nome": "Larissa Moura",
+    "minhaLista": [
+      "Professor Polvo",
+      "Blackfish",
+      "Grizzly Man: O Homem Urso",
+      "Cosmos",
+      "Won't You Be My Neighbor?"
+    ],
+    "avaliacoes": {
+      "Professor Polvo": 9.5,
+      "Blackfish": 9.0,
+      "Grizzly Man: O Homem Urso": 8.5,
+      "Cosmos": 9.5,
+      "Won't You Be My Neighbor?": 9.0,
+      "Free Solo": 8.5
+    }
+  },
+  {
+    "username": "gustavo_tarantino",
+    "nome": "Gustavo Barreto",
+    "minhaLista": [
+      "Pulp Fiction",
+      "Bastardos Inglorios",
+      "Django Livre",
+      "Oldboy",
+      "Clube da Luta",
+      "Onde os Fracos Nao Tem Vez"
+    ],
+    "avaliacoes": {
+      "Pulp Fiction": 10.0,
+      "Bastardos Inglorios": 9.5,
+      "Django Livre": 9.0,
+      "Oldboy": 9.5,
+      "Clube da Luta": 9.0,
+      "Onde os Fracos Nao Tem Vez": 9.5,
+      "O Profissional": 8.5
+    }
+  },
+  {
+    "username": "bianca_drama",
+    "nome": "Bianca Rezende",
+    "minhaLista": [
+      "The Bear",
+      "Succession",
+      "Sangue Negro",
+      "Um Sonho de Liberdade",
+      "Forrest Gump: O Contador de Historias",
+      "Jiro Dreams of Sushi"
+    ],
+    "avaliacoes": {
+      "The Bear": 9.5,
+      "Succession": 9.5,
+      "Sangue Negro": 9.0,
+      "Um Sonho de Liberdade": 10.0,
+      "Forrest Gump: O Contador de Historias": 9.0,
+      "Jiro Dreams of Sushi": 9.0,
+      "O Lobo de Wall Street": 8.5
+    }
+  },
+  {
+    "username": "mateus_guerra",
+    "nome": "Mateus Cavalcanti",
+    "minhaLista": [
+      "Band of Brothers",
+      "O Resgate do Soldado Ryan",
+      "A Lista de Schindler",
+      "O Senhor dos Aneis: A Sociedade do Anel",
+      "Game of Thrones"
+    ],
+    "avaliacoes": {
+      "Band of Brothers": 10.0,
+      "O Resgate do Soldado Ryan": 9.5,
+      "A Lista de Schindler": 10.0,
+      "O Senhor dos Aneis: A Sociedade do Anel": 9.5,
+      "Game of Thrones": 8.5,
+      "Bastardos Inglorios": 9.0
+    }
+  },
+  {
+    "username": "sofia_mrrobot",
+    "nome": "Sofia Duarte",
+    "minhaLista": [
+      "Mr. Robot",
+      "Dark",
+      "Severance",
+      "Sherlock",
+      "O Dilema das Redes"
+    ],
+    "avaliacoes": {
+      "Mr. Robot": 9.5,
+      "Dark": 9.5,
+      "Severance": 9.0,
+      "Sherlock": 8.5,
+      "O Dilema das Redes": 8.0,
+      "Matrix": 9.0,
+      "Black Mirror": 8.5
+    }
+  },
+  {
+    "username": "arthur_comedia",
+    "nome": "Arthur Pinheiro",
+    "minhaLista": [
+      "The Office",
+      "Atlanta",
+      "De Volta para o Futuro",
+      "Super Size Me: A Dieta do Palhaco",
+      "Exit Through the Gift Shop"
+    ],
+    "avaliacoes": {
+      "The Office": 9.5,
+      "Atlanta": 9.0,
+      "De Volta para o Futuro": 9.5,
+      "Super Size Me: A Dieta do Palhaco": 7.5,
+      "Exit Through the Gift Shop": 8.5,
+      "O Lobo de Wall Street": 9.0
+    }
+  },
+  {
+    "username": "helena_kubrick",
+    "nome": "Helena Montenegro",
+    "minhaLista": [
+      "O Iluminado",
+      "Laranja Mecanica",
+      "2001: Uma Odisseia no Espaco",
+      "Coringa",
+      "Taxi Driver"
+    ],
+    "avaliacoes": {
+      "O Iluminado": 9.5,
+      "Laranja Mecanica": 9.0,
+      "2001: Uma Odisseia no Espaco": 9.0,
+      "Coringa": 8.5,
+      "Taxi Driver": 9.5,
+      "Clube da Luta": 8.5
+    }
+  },
+  {
+    "username": "gabriel_tlou",
+    "nome": "Gabriel Santana",
+    "minhaLista": [
+      "The Last of Us",
+      "Stranger Things",
+      "Game of Thrones",
+      "Duna",
+      "Arcane"
+    ],
+    "avaliacoes": {
+      "The Last of Us": 9.0,
+      "Stranger Things": 8.5,
+      "Game of Thrones": 8.0,
+      "Duna": 9.0,
+      "Arcane": 9.5,
+      "The Bear": 8.5
+    }
+  },
+  {
+    "username": "natalia_arte",
+    "nome": "Natalia Bezerra",
+    "minhaLista": [
+      "Exit Through the Gift Shop",
+      "O Sal da Terra",
+      "Amy",
+      "O Fabuloso Destino de Amelie Poulain",
+      "Central do Brasil"
+    ],
+    "avaliacoes": {
+      "Exit Through the Gift Shop": 9.0,
+      "O Sal da Terra": 9.5,
+      "Amy": 9.0,
+      "O Fabuloso Destino de Amelie Poulain": 9.5,
+      "Central do Brasil": 9.5,
+      "Whiplash": 8.5
+    }
+  },
+  {
+    "username": "bruno_classicos",
+    "nome": "Bruno Tavares",
+    "minhaLista": [
+      "Um Sonho de Liberdade",
+      "O Poderoso Chefao",
+      "A Lista de Schindler",
+      "Forrest Gump: O Contador de Historias",
+      "De Volta para o Futuro"
+    ],
+    "avaliacoes": {
+      "Um Sonho de Liberdade": 9.5,
+      "O Poderoso Chefao": 9.5,
+      "A Lista de Schindler": 9.5,
+      "Forrest Gump: O Contador de Historias": 8.5,
+      "De Volta para o Futuro": 9.0,
+      "Gladiador": 9.0
+    }
+  },
+  {
+    "username": "isa_maratona",
+    "nome": "Isabela Queiroz",
+    "minhaLista": [
+      "Stranger Things",
+      "The Office",
+      "The Last of Us",
+      "Sherlock",
+      "Narcos"
+    ],
+    "avaliacoes": {
+      "Stranger Things": 9.0,
+      "The Office": 9.0,
+      "The Last of Us": 9.0,
+      "Sherlock": 9.0,
+      "Narcos": 8.5,
+      "Breaking Bad": 9.5
+    }
+  },
+  {
+    "username": "caio_imd",
+    "nome": "Caio Henrique",
+    "minhaLista": [
+      "Mr. Robot",
+      "Severance",
+      "O Dilema das Redes",
+      "Cosmos",
+      "A Origem",
+      "Homem-Aranha no Aranhaverso"
+    ],
+    "avaliacoes": {
+      "Mr. Robot": 9.5,
+      "Severance": 9.5,
+      "O Dilema das Redes": 8.5,
+      "Cosmos": 9.0,
+      "A Origem": 9.0,
+      "Homem-Aranha no Aranhaverso": 9.0,
+      "Matrix": 9.5
+    }
   }
 ]

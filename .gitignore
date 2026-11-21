@@ -12,5 +12,5 @@ bin/
 .DS_Store
 Thumbs.db
 
-# Documentos
-imdflix.zip 
+# Temporarios
+tmp/

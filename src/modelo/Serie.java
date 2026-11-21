@@ -4,11 +4,16 @@ package modelo;
  * Série: uma mídia dividida em temporadas e episódios.
  */
 public class Serie extends Midia implements Exibivel {
+    /** Quantidade de temporadas. */
     private final int temporadas;
+    /** Episódios em cada temporada (o mesmo número para todas). */
     private final int episodiosPorTemporada;
+    /** Duração média de um episódio, em minutos. */
     private final int duracaoMediaEpisodio;
 
     /**
+     * Cria uma série.
+     *
      * @param titulo título (não pode ser vazio)
      * @param genero gênero (não pode ser vazio)
      * @param anoLancamento ano de lançamento (a partir de 1888)
@@ -35,12 +40,20 @@ public class Serie extends Midia implements Exibivel {
         return "Serie";
     }
 
-    /** @return quantidade de episódios de cada temporada */
+    /**
+     * Informa quantos episódios há em cada temporada.
+     *
+     * @return quantidade de episódios de cada temporada
+     */
     public int getEpisodiosPorTemporada() {
         return episodiosPorTemporada;
     }
 
-    /** @return duração média de um episódio, em minutos */
+    /**
+     * Informa a duração média de um episódio.
+     *
+     * @return duração média de um episódio, em minutos
+     */
     public int getDuracaoMediaEpisodio() {
         return duracaoMediaEpisodio;
     }
@@ -56,7 +69,11 @@ public class Serie extends Midia implements Exibivel {
         return temporadas + " temporada(s), " + episodiosPorTemporada + " episodios cada";
     }
 
-    /** @return quantidade de temporadas */
+    /**
+     * Informa quantas temporadas a série tem.
+     *
+     * @return quantidade de temporadas
+     */
     public int getTemporadas() {
         return temporadas;
     }

@@ -4,10 +4,14 @@ package modelo;
  * Documentário: uma mídia com duração única e um tema.
  */
 public class Documentario extends Midia implements Exibivel {
+    /** Duração do documentário, em minutos. */
     private final int duracaoMinutos;
+    /** Tema abordado. */
     private final String tema;
 
     /**
+     * Cria um documentário.
+     *
      * @param titulo título (não pode ser vazio)
      * @param genero gênero (não pode ser vazio)
      * @param anoLancamento ano de lançamento (a partir de 1888)
@@ -45,7 +49,11 @@ public class Documentario extends Midia implements Exibivel {
         return duracaoMinutos + " min sobre " + tema;
     }
 
-    /** @return o tema abordado */
+    /**
+     * Informa o assunto tratado no documentário.
+     *
+     * @return o tema abordado
+     */
     public String getTema() {
         return tema;
     }

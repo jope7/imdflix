@@ -30,9 +30,17 @@ public interface Avaliavel {
      */
     void substituirAvaliacao(double notaAntiga, double notaNova) throws NotaInvalidaException;
 
-    /** @return a média das notas (0 se não há avaliações) */
+    /**
+     * Calcula a nota média das avaliações recebidas.
+     *
+     * @return a média das notas (0 se não há avaliações)
+     */
     double getNotaMedia();
 
-    /** @return quantas avaliações foram registradas */
+    /**
+     * Informa quantas avaliações foram registradas.
+     *
+     * @return quantas avaliações foram registradas
+     */
     int getQuantidadeAvaliacoes();
 }

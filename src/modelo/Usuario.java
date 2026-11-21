@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Pattern;
+
 import excecoes.NotaInvalidaException;
 
 /**
@@ -20,12 +21,16 @@ import excecoes.NotaInvalidaException;
  * </ul>
  */
 public class Usuario {
-    // padrao
+    /** Formato aceito para o username: de 3 a 20 caracteres entre letras minúsculas, números e {@code _}. */
     private static final Pattern FORMATO_USERNAME = Pattern.compile("^[a-z0-9_]{3,20}$");
 
+    /** Identificador único do usuário, já normalizado (minúsculas, sem espaços nas pontas). */
     private final String username;
+    /** Nome de exibição (pode se repetir entre usuários). */
     private String nome;
+    /** Títulos guardados em "Minha lista", sem repetição e na ordem em que foram adicionados. */
     private final List<String> minhaLista = new ArrayList<>();
+    /** Notas dadas pelo usuário: título da mídia para nota (no máximo uma por mídia). */
     private final Map<String, Double> avaliacoes = new LinkedHashMap<>();
 
     /**
@@ -85,6 +90,12 @@ public class Usuario {
         return usuario;
     }
 
+    /**
+     * Garante que o título recebido não é nulo nem está em branco.
+     *
+     * @param titulo o título a validar
+     * @throws IllegalArgumentException se o título for nulo ou em branco
+     */
     private static void validarTitulo(String titulo) {
         if (titulo == null || titulo.isBlank()) {
             throw new IllegalArgumentException("O titulo nao pode ser vazio.");
@@ -151,12 +162,20 @@ public class Usuario {
         avaliacoes.put(midia.getTitulo(), nota);
     }
 
-    /** @return o username (ID) já normalizado */
+    /**
+     * Informa o username, que identifica o usuário e não muda.
+     *
+     * @return o username (ID) já normalizado
+     */
     public String getUsername() {
         return username;
     }
 
-    /** @return o nome de exibição */
+    /**
+     * Informa o nome mostrado nas telas.
+     *
+     * @return o nome de exibição
+     */
     public String getNome() {
         return nome;
     }
@@ -174,12 +193,20 @@ public class Usuario {
         this.nome = nome;
     }
 
-    /** @return visão somente leitura dos títulos da lista */
+    /**
+     * Lista os títulos que o usuário guardou em "Minha lista".
+     *
+     * @return visão somente leitura dos títulos da lista
+     */
     public List<String> getMinhaLista() {
         return Collections.unmodifiableList(minhaLista);
     }
 
-    /** @return visão somente leitura das notas, por título */
+    /**
+     * Lista as notas que o usuário deu, indexadas pelo título da mídia.
+     *
+     * @return visão somente leitura das notas, por título
+     */
     public Map<String, Double> getAvaliacoes() {
         return Collections.unmodifiableMap(avaliacoes);
     }

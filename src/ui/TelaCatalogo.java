@@ -49,12 +49,14 @@ public class TelaCatalogo {
         cbGenero.setOnAction(e -> filtrarPorGenero());
 
         // navegação
+        Button btnRecomendacoes = new Button("Recomendações");
+        btnRecomendacoes.setOnAction(e -> app.mostrarRecomendacoes());
         Button btnMinhaLista = new Button("Minha lista");
         btnMinhaLista.setOnAction(e -> app.mostrarMinhaLista());
         Button btnSair = new Button("Sair");
         btnSair.setOnAction(e -> app.mostrarLogin());
 
-        HBox barra = new HBox(10, txtBusca, btnBuscar, cbGenero, btnMinhaLista, btnSair);
+        HBox barra = new HBox(10, txtBusca, btnBuscar, cbGenero, btnRecomendacoes, btnMinhaLista, btnSair);
 
         // tabela
         criarColunas();

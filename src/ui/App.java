@@ -57,6 +57,10 @@ public class App extends Application {
         trocarTela(new TelaMinhaLista(this).getRaiz());
     }
 
+    public void mostrarRecomendacoes() {
+        trocarTela(new TelaRecomendacoes(this).getRaiz());
+    }
+
     public Catalogo getCatalogo() { return catalogo; }
     public GerenciadorUsuarios getGerenciador() { return gerenciador; }
     public Usuario getUsuarioLogado() { 

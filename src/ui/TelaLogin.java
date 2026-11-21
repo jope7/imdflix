@@ -13,13 +13,28 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import modelo.Usuario;
 
+/**
+ * Tela inicial: entrar com um username existente ou criar uma conta nova (username e nome).
+ *
+ * Os erros (username inexistente, em formato inválido ou já em uso) aparecem na própria tela.
+ */
 public class TelaLogin {
+    /** Controlador de telas. */
     private final App app;
+    /** Painel raiz da tela. */
     private final VBox raiz;
+    /** Campo do username. */
     private final TextField txtUsername = new TextField();
+    /** Campo do nome (só usado ao criar conta). */
     private final TextField txtNome = new TextField();
+    /** Mensagem de erro. */
     private final Label lblErro = new Label();
 
+    /**
+     * Monta a tela.
+     *
+     * @param app o controlador de telas
+     */
     public TelaLogin(App app) {
         this.app = app;
 
@@ -46,6 +61,7 @@ public class TelaLogin {
         raiz.setPadding(new Insets(20));
     }
 
+    /** Entra com o username digitado. Se ele não existir ou tiver formato inválido, mostra o erro. */
     private void entrar() {
         try {
             Optional <Usuario> resultado = app.getGerenciador().entrar(txtUsername.getText());
@@ -61,6 +77,7 @@ public class TelaLogin {
             }
     }
 
+    /** Cria uma conta com o username e o nome digitados e já entra com ela. Mostra o erro se o username for inválido ou já existir. */
     private void criarConta() {
         try {
             Usuario novo = app.getGerenciador().cadastrar(txtUsername.getText(), txtNome.getText());
@@ -73,6 +90,11 @@ public class TelaLogin {
         }
     }
 
+    /**
+     * Informa o painel da tela.
+     *
+     * @return o painel raiz
+     */
     public VBox getRaiz() {
         return raiz;
     }

@@ -17,16 +17,33 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import modelo.Midia;
 
+/**
+ * Tela do catálogo: tabela com todos os títulos (tipo, título, gênero e nota média), busca pelo
+ * título e filtro por gênero. Um clique duplo em uma linha abre o detalhe do título. Também leva às
+ * recomendações e à lista pessoal.
+ */
 public class TelaCatalogo {
+    /** Opção do filtro que mostra todos os gêneros. */
     private static final String TODOS = "Todos os gêneros";
 
+    /** Controlador de telas. */
     private final App app;
+    /** Painel raiz da tela. */
     private final VBox raiz;
+    /** Tabela com os títulos. */
     private final TableView<Midia> tabela = new TableView<>();
+    /** Campo de busca pelo título. */
     private final TextField txtBusca = new TextField();
+    /** Filtro por gênero. */
     private final ComboBox<String> cbGenero = new ComboBox<>();
+    /** Mensagem de erro. */
     private final Label lblErro = new Label();
 
+    /**
+     * Monta a tela.
+     *
+     * @param app o controlador de telas
+     */
     public TelaCatalogo(App app) {
         this.app = app;
 
@@ -78,6 +95,7 @@ public class TelaCatalogo {
         raiz.setPadding(new Insets(15));
     }
 
+    /** Cria as colunas da tabela: tipo, título, gênero e nota média. */
     private void criarColunas() {
         TableColumn<Midia, String> colTipo = new TableColumn<>("Tipo");
         colTipo.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getTipo()));
@@ -96,6 +114,7 @@ public class TelaCatalogo {
         tabela.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
     }
 
+    /** Procura o título digitado e abre o seu detalhe. Se não existir, mostra o erro. */
     private void buscar() {
         Optional<Midia> resultado = app.getCatalogo().buscarPorTitulo(txtBusca.getText());
 
@@ -108,6 +127,7 @@ public class TelaCatalogo {
         }
     }
 
+    /** Mostra na tabela só os títulos do gênero escolhido (ou todos). */
     private void filtrarPorGenero() {
         String genero = cbGenero.getValue();
         List<Midia> lista;
@@ -119,6 +139,11 @@ public class TelaCatalogo {
         tabela.setItems(FXCollections.observableArrayList(lista));
     }
 
+    /**
+     * Informa o painel da tela.
+     *
+     * @return o painel raiz
+     */
     public VBox getRaiz() {
         return raiz;
     }

@@ -12,12 +12,25 @@ import javafx.scene.layout.VBox;
 import modelo.Midia;
 import java.io.IOException;
 
+/**
+ * Tela da lista pessoal ("Minha lista") do usuário logado: mostra os títulos guardados e permite
+ * abrir o detalhe de um deles ou removê-lo da lista.
+ */
 public class TelaMinhaLista {
+    /** Controlador de telas. */
     private final App app;
+    /** Painel raiz da tela. */
     private final VBox raiz;
+    /** Títulos da lista do usuário. */
     private final ListView<String> lista = new ListView<>();
+    /** Mensagem de erro. */
     private final Label lblErro = new Label();
 
+    /**
+     * Monta a tela.
+     *
+     * @param app o controlador de telas
+     */
     public TelaMinhaLista(App app) {
         this.app = app;
 
@@ -50,11 +63,12 @@ public class TelaMinhaLista {
         raiz.setPadding(new Insets(15));
     }
 
-    // recarrega os títulos da lista do usuário logado
+    /** Recarrega os títulos da lista do usuário logado. */
     private void atualizarLista() {
         lista.setItems(FXCollections.observableArrayList(app.getUsuarioLogado().getMinhaLista()));
     }
 
+    /** Abre o detalhe do título selecionado. Mostra o erro se nada estiver selecionado ou se o título não existir mais. */
     private void abrirSelecionado() {
         String titulo = lista.getSelectionModel().getSelectedItem();
         if (titulo == null) {
@@ -70,6 +84,7 @@ public class TelaMinhaLista {
         }
     }
 
+    /** Remove o título selecionado da lista e salva o usuário. Mostra o erro se nada estiver selecionado ou não for possível salvar. */
     private void removerSelecionado() {
         String titulo = lista.getSelectionModel().getSelectedItem();
         if (titulo == null) {
@@ -92,6 +107,11 @@ public class TelaMinhaLista {
         }
     }
 
+    /**
+     * Informa o painel da tela.
+     *
+     * @return o painel raiz
+     */
     public VBox getRaiz() {
         return raiz;
     }

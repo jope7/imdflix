@@ -21,18 +21,33 @@ import servico.Recomendador;
 
 /** Mostra recomendações para o usuário logado; o critério (Strategy) pode ser trocado na própria tela. */
 public class TelaRecomendacoes {
+    /** Quantidade de recomendações mostradas. */
     private static final int LIMITE = 5;
 
+    /** Controlador de telas. */
     private final App app;
+    /** Painel raiz da tela. */
     private final VBox raiz;
+    /** Contexto do Strategy: guarda o critério em uso. */
     private final Recomendador recomendador;
+    /** Critérios disponíveis, indexados pelo nome mostrado na tela. */
     private final Map<String, RecomendacaoStrategy> estrategias = new LinkedHashMap<>();
+    /** Caixa de seleção do critério. */
     private final ComboBox<String> cbEstrategia = new ComboBox<>();
+    /** Explicação do critério em uso. */
     private final Label lblDescricao = new Label();
+    /** Recomendações mostradas. */
     private final ListView<String> lista = new ListView<>();
+    /** Mensagem de erro. */
     private final Label lblErro = new Label();
+    /** Recomendações atuais, na mesma ordem das linhas da lista. */
     private List<Midia> atuais = List.of();
 
+    /**
+     * Monta a tela, com o critério "Mais bem avaliados" selecionado.
+     *
+     * @param app o controlador de telas
+     */
     public TelaRecomendacoes(App app) {
         this.app = app;
 
@@ -72,6 +87,7 @@ public class TelaRecomendacoes {
         atualizar();
     }
 
+    /** Troca o critério de recomendação para o escolhido na caixa e atualiza a lista. */
     private void trocarEstrategia() {
         String nome = cbEstrategia.getValue();
         if (nome == null) {
@@ -81,7 +97,7 @@ public class TelaRecomendacoes {
         atualizar();
     }
 
-    // recalcula as recomendações com a estratégia atual
+    /** Recalcula as recomendações com o critério atual e atualiza a lista. */
     private void atualizar() {
         RecomendacaoStrategy estrategia = recomendador.getEstrategia();
         lblDescricao.setText(estrategia.getDescricao());
@@ -100,6 +116,7 @@ public class TelaRecomendacoes {
         lista.setItems(FXCollections.observableArrayList(linhas));
     }
 
+    /** Abre o detalhe do título selecionado. Mostra o erro se nada estiver selecionado. */
     private void abrirSelecionado() {
         int indice = lista.getSelectionModel().getSelectedIndex();
         if (indice < 0 || indice >= atuais.size()) {
@@ -109,6 +126,11 @@ public class TelaRecomendacoes {
         app.mostrarDetalhe(atuais.get(indice));
     }
 
+    /**
+     * Informa o painel da tela.
+     *
+     * @return o painel raiz
+     */
     public VBox getRaiz() {
         return raiz;
     }

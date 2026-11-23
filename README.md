@@ -54,8 +54,9 @@ A pasta `out` é gerada na compilação e não é versionada (está no `.gitigno
 5. Em "Recomendações", escolha o critério na caixa de seleção.
 
 Exemplo para conferir as recomendações: com `trembo_dev` (que ainda não avaliou nada), o critério
-"Mais bem avaliados" mostra Free Solo, Dark e Matrix, e "Pelo seu gosto" fica vazio. Depois de dar nota 9
-ao Matrix, "Pelo seu gosto" passa a sugerir Interestelar, que é do mesmo gênero (Ficção).
+"Mais bem avaliados" mostra os títulos com média 10,0 (como A Viagem de Chihiro e Cidade de Deus),
+e "Pelo seu gosto" fica vazio. Depois de dar nota 9 ao Matrix (Ficção), "Pelo seu gosto" passa a
+sugerir apenas títulos de Ficção, como Blade Runner 2049 e A Origem.
 
 O programa grava as alterações nos arquivos de `dados/`. Para voltar ao estado de exemplo, use
 `git restore dados`.

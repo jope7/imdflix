@@ -40,6 +40,7 @@ public class TelaLogin {
 
         Label titulo = new Label("IMDFlix");
         titulo.setStyle("-fx-font-size: 28px; -fx-font-weight: bold;");
+        titulo.getStyleClass().add("logo");
 
         txtUsername.setPromptText("username");
         txtNome.setPromptText("nome (só para criar conta)");
@@ -50,6 +51,7 @@ public class TelaLogin {
         Button btnCriarConta = new Button("Criar conta");
         btnEntrar.setOnAction(e -> entrar());
         btnCriarConta.setOnAction(e -> criarConta());
+        btnEntrar.getStyleClass().add("primario");
 
         lblErro.setStyle("-fx-text-fill: red;");
 

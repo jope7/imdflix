@@ -160,3 +160,25 @@
     -fx-font-size: 12px;
     -fx-font-weight: bold;
 }
+/* ---------- Minha lista e Recomendações ---------- */
+
+/* Título grande das telas */
+.titulo-tela {
+    -fx-text-fill: white;
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+}
+
+/* Textos de apoio (quantidade, descrição do critério, lista vazia) */
+.descricao {
+    -fx-text-fill: #b3b3b3;
+}
+
+/* Botão de remover embaixo de cada cartão */
+.button.remover {
+    -fx-font-size: 12px;
+    -fx-padding: 4 10;
+}
+.button.remover:hover {
+    -fx-background-color: #e50914;
+}

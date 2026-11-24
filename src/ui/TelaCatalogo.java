@@ -13,7 +13,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import modelo.Midia;
 
@@ -25,12 +24,6 @@ import modelo.Midia;
 public class TelaCatalogo {
     /** Opção do filtro que mostra todos os gêneros. */
     private static final String TODOS = "Todos os gêneros";
-    /** Cores das capas, escolhidas pelo gênero (apenas aparência). */
-    private static final String[] CORES = {
-        "#b81d24", "#1f6feb", "#8957e5", "#2ea043", "#d29922", "#db6d28", "#1b7c83", "#bf3989"
-    };
-    /** Largura de cada cartão, em pixels. */
-    private static final double LARGURA_CARTAO = 150;
 
     /** Controlador de telas. */
     private final App app;
@@ -116,66 +109,13 @@ public class TelaCatalogo {
     private void mostrarTitulos(List<Midia> midias) {
         grade.getChildren().clear();
         for (Midia midia : midias) {
-            grade.getChildren().add(criarCartao(midia));
+            grade.getChildren().add(CartaoMidia.criar(midia, () -> app.mostrarDetalhe(midia)));
         }
         if (midias.isEmpty()) {
             Label vazio = new Label("Nenhum título para mostrar.");
             vazio.getStyleClass().add("card-info");
             grade.getChildren().add(vazio);
         }
-    }
-
-    /**
-     * Monta o cartão de um título: uma capa colorida com a inicial e o tipo, e embaixo o título,
-     * o gênero com o ano e a nota média. Clicar no cartão abre o detalhe.
-     *
-     * @param midia o título
-     * @return o cartão
-     */
-    private VBox criarCartao(Midia midia) {
-        Label inicial = new Label(midia.getTitulo().substring(0, 1).toUpperCase());
-        inicial.getStyleClass().add("capa-letra");
-
-        Label tipo = new Label(midia.getTipo().toUpperCase());
-        tipo.getStyleClass().add("capa-tipo");
-
-        StackPane capa = new StackPane(inicial, tipo);
-        StackPane.setAlignment(tipo, Pos.TOP_LEFT);
-        StackPane.setMargin(tipo, new Insets(8));
-        capa.getStyleClass().add("capa");
-        capa.setStyle("-fx-background-color: linear-gradient(to bottom right, "
-                + corDoGenero(midia.getGenero()) + ", #141414);");
-        capa.setMinSize(LARGURA_CARTAO, 200);
-        capa.setPrefSize(LARGURA_CARTAO, 200);
-        capa.setMaxSize(LARGURA_CARTAO, 200);
-
-        Label nome = new Label(midia.getTitulo());
-        nome.getStyleClass().add("card-titulo");
-        nome.setMaxWidth(LARGURA_CARTAO);
-
-        Label info = new Label(midia.getGenero() + " · " + midia.getAnoLancamento());
-        info.getStyleClass().add("card-info");
-        info.setMaxWidth(LARGURA_CARTAO);
-
-        Label nota = new Label(String.format("★ %.1f", midia.getNotaMedia()));
-        nota.getStyleClass().add("card-nota");
-
-        VBox cartao = new VBox(6, capa, nome, info, nota);
-        cartao.getStyleClass().add("card");
-        cartao.setPrefWidth(LARGURA_CARTAO);
-        cartao.setMaxWidth(LARGURA_CARTAO);
-        cartao.setOnMouseClicked(e -> app.mostrarDetalhe(midia));
-        return cartao;
-    }
-
-    /**
-     * Escolhe a cor da capa a partir do gênero, para títulos do mesmo gênero terem a mesma cor.
-     *
-     * @param genero o gênero do título
-     * @return a cor em hexadecimal
-     */
-    private static String corDoGenero(String genero) {
-        return CORES[Math.floorMod(genero.toLowerCase().hashCode(), CORES.length)];
     }
 
     /** Procura o título digitado e abre o seu detalhe. Se não existir, mostra o erro. */

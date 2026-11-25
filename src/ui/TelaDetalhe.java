@@ -63,6 +63,7 @@ public class TelaDetalhe {
         txtNota.setPromptText("nota de 0 a 10");
         txtNota.setMaxWidth(120);
         Button btnAvaliar = new Button("Avaliar");
+        btnAvaliar.getStyleClass().add("primario");
         btnAvaliar.setOnAction(e -> avaliar());
         HBox linhaAvaliar = new HBox(10, txtNota, btnAvaliar);
 

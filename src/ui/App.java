@@ -13,6 +13,8 @@ import servico.Catalogo;
 import servico.GerenciadorUsuarios;
 import modelo.Midia;
 import servico.SessaoUsuario;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 /**
  * Ponto de entrada da interface JavaFX e controlador de telas.
@@ -58,8 +60,15 @@ public class App extends Application {
      *
      * @param raiz o painel raiz da nova tela
      */
+    /** Arquivo de estilo das telas (caminho relativo à raiz do projeto). */
+    private static final Path ESTILO = Path.of("src", "ui", "estilo.css");
+
     private void trocarTela(Parent raiz) {
-        stage.setScene(new Scene(raiz, 700, 450));
+        Scene cena = new Scene(raiz, 900, 600);
+        if (Files.exists(ESTILO)) {
+            cena.getStylesheets().add(ESTILO.toUri().toString());
+        }
+        stage.setScene(cena);
     }
 
     /** Mostra a tela de login e encerra a sessão do usuário atual. */

@@ -1,16 +1,18 @@
 package ui;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
-import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import modelo.Midia;
-import java.io.IOException;
 
 /**
  * Tela da lista pessoal ("Minha lista") do usuário logado: mostra os títulos guardados e permite
@@ -21,8 +23,10 @@ public class TelaMinhaLista {
     private final App app;
     /** Painel raiz da tela. */
     private final VBox raiz;
-    /** Títulos da lista do usuário. */
-    private final ListView<String> lista = new ListView<>();
+    /** Grade com os cartões dos títulos da lista. */
+    private final FlowPane grade = new FlowPane();
+    /** Quantidade de títulos na lista. */
+    private final Label lblQuantidade = new Label();
     /** Mensagem de erro. */
     private final Label lblErro = new Label();
 
@@ -37,73 +41,78 @@ public class TelaMinhaLista {
         Button btnVoltar = new Button("← Voltar ao catálogo");
         btnVoltar.setOnAction(e -> app.mostrarCatalogo());
 
-        Label titulo = new Label("Minha lista — " + app.getUsuarioLogado().getNome());
-        titulo.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+                Label titulo = new Label("Minha lista");
+        titulo.getStyleClass().add("titulo-tela");
+        lblQuantidade.getStyleClass().add("descricao");
+        HBox cabecalho = new HBox(12, titulo, lblQuantidade);
+        cabecalho.setAlignment(Pos.BASELINE_LEFT);
 
-        // lista de títulos
-        lista.setPlaceholder(new Label("Sua lista está vazia. Adicione títulos pela tela de detalhe."));
-        lista.setOnMouseClicked(e -> {
-            if (e.getClickCount() == 2) {
-                abrirSelecionado();
-            }
-        });
+        grade.setHgap(16);
+        grade.setVgap(18);
+        grade.setPadding(new Insets(8));
+
+        ScrollPane rolagem = new ScrollPane(grade);
+        rolagem.setFitToWidth(true);
+
+        lblErro.getStyleClass().add("erro");
+
+        raiz = new VBox(14, btnVoltar, cabecalho, lblErro, rolagem);
+        VBox.setVgrow(rolagem, Priority.ALWAYS);
+        raiz.setPadding(new Insets(20));
+
         atualizarLista();
-
-        // botões
-        Button btnAbrir = new Button("Ver detalhes");
-        btnAbrir.setOnAction(e -> abrirSelecionado());
-        Button btnRemover = new Button("Remover da lista");
-        btnRemover.setOnAction(e -> removerSelecionado());
-        HBox botoes = new HBox(10, btnAbrir, btnRemover);
-
-        lblErro.setStyle("-fx-text-fill: red;");
-
-        raiz = new VBox(10, btnVoltar, titulo, lista, botoes, lblErro);
-        VBox.setVgrow(lista, Priority.ALWAYS);
-        raiz.setPadding(new Insets(15));
     }
 
-    /** Recarrega os títulos da lista do usuário logado. */
+        /** Recarrega os cartões com os títulos da lista do usuário logado. */
     private void atualizarLista() {
-        lista.setItems(FXCollections.observableArrayList(app.getUsuarioLogado().getMinhaLista()));
-    }
+        List<String> titulos = app.getUsuarioLogado().getMinhaLista();
+        grade.getChildren().clear();
 
-    /** Abre o detalhe do título selecionado. Mostra o erro se nada estiver selecionado ou se o título não existir mais. */
-    private void abrirSelecionado() {
-        String titulo = lista.getSelectionModel().getSelectedItem();
-        if (titulo == null) {
-            lblErro.setText("Selecione um título");
-            return;
-        }
-
-        Optional<Midia> resultado = app.getCatalogo().buscarPorTitulo(titulo);
-        if (resultado.isEmpty()) {
-            lblErro.setText("Este título não está mais no catálogo.");
-        } else {
-            app.mostrarDetalhe(resultado.get());
-        }
-    }
-
-    /** Remove o título selecionado da lista e salva o usuário. Mostra o erro se nada estiver selecionado ou não for possível salvar. */
-    private void removerSelecionado() {
-        String titulo = lista.getSelectionModel().getSelectedItem();
-        if (titulo == null) {
-            lblErro.setText("Selecione um título.");
-            return;
-        }
-
-        Optional<Midia> resultado = app.getCatalogo().buscarPorTitulo(titulo);
-        if (resultado.isEmpty()) {
-            lblErro.setText("Este título não está mais no catálogo.");
-        } else {
-            try {
-                app.getUsuarioLogado().removerDaLista(resultado.get());
-                app.getGerenciador().salvar(app.getUsuarioLogado());
-                atualizarLista();
-                lblErro.setText("");
-            } catch (IOException e) {
-                lblErro.setText("Erro ao salvar os dados do usuário.");
+        for (String titulo : titulos) {
+            Optional<Midia> resultado = app.getCatalogo().buscarPorTitulo(titulo);
+            if (resultado.isPresent()) {
+                grade.getChildren().add(criarItem(resultado.get()));
             }
+        }
+
+        if (titulos.isEmpty()) {
+            Label vazio = new Label("Sua lista está vazia. Adicione títulos pela tela de detalhe.");
+            vazio.getStyleClass().add("descricao");
+            grade.getChildren().add(vazio);
+        }
+        lblQuantidade.setText(titulos.size() == 1 ? "1 título" : titulos.size() + " títulos");
+    }
+
+    /**
+     * Monta um item da lista: o cartão do título (que abre o detalhe) e o botão de remover.
+     *
+     * @param midia o título
+     * @return o item
+     */
+    private VBox criarItem(Midia midia) {
+        VBox cartao = CartaoMidia.criar(midia, () -> app.mostrarDetalhe(midia));
+
+        Button btnRemover = new Button("Remover");
+        btnRemover.getStyleClass().add("remover");
+        btnRemover.setMaxWidth(CartaoMidia.LARGURA);
+        btnRemover.setOnAction(e -> remover(midia));
+
+        return new VBox(8, cartao, btnRemover);
+    }
+
+    /**
+     * Remove o título da lista e salva o usuário. Mostra o erro se não for possível salvar.
+     *
+     * @param midia o título a remover
+     */
+    private void remover(Midia midia) {
+        try {
+            app.getUsuarioLogado().removerDaLista(midia);
+            app.getGerenciador().salvar(app.getUsuarioLogado());
+            atualizarLista();
+            lblErro.setText("");
+        } catch (IOException e) {
+            lblErro.setText("Erro ao salvar os dados do usuário.");
         }
     }
 
